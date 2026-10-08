@@ -1,0 +1,210 @@
+<!doctype html>
+<html><head><meta charset='utf-8'>
+<title>Secondary inner-validation calibrated event metrics</title>
+<style>
+body{font-family:'Times New Roman',serif;margin:24px;color:#111827;}
+table{border-collapse:collapse;font-size:14px;}
+th,td{border:1px solid #CBD5E1;padding:6px 8px;text-align:center;}
+th{background:#E5E7EB;font-weight:bold;}
+.best{background:#DCFCE7;font-weight:bold;}
+.tie{background:#FEF3C7;font-weight:bold;}
+.left{text-align:left;}
+</style></head><body>
+<h2>Secondary inner-validation calibrated event metrics</h2>
+<table><thead><tr>
+<th>analysis</th>
+<th>fold</th>
+<th>bearing</th>
+<th>model_label</th>
+<th>threshold</th>
+<th>reference_fpt</th>
+<th>predicted_fpt</th>
+<th>signed_delay</th>
+<th>abs_error</th>
+<th>pre_fpt_positive_count</th>
+<th>pre_fpt_alarm_run</th>
+<th>missed</th>
+<th>best_model_by_abs_error</th>
+</tr></thead><tbody>
+<tr>
+<td>secondary_inner_val_calibrated</td>
+<td>0</td>
+<td>bearing1_1</td>
+<td class='best'>CWT-CNN</td>
+<td>0.95</td>
+<td>1871</td>
+<td>2460</td>
+<td>589</td>
+<td>589</td>
+<td>27</td>
+<td>False</td>
+<td>False</td>
+<td class='best'>cnn</td>
+</tr>
+<tr>
+<td>secondary_inner_val_calibrated</td>
+<td>0</td>
+<td>bearing1_1</td>
+<td>CWT-CNN-LSTM</td>
+<td>0.95</td>
+<td>1871</td>
+<td>15</td>
+<td>-1856</td>
+<td>1856</td>
+<td>1368</td>
+<td>True</td>
+<td>False</td>
+<td class='best'>cnn</td>
+</tr>
+<tr>
+<td>secondary_inner_val_calibrated</td>
+<td>1</td>
+<td>bearing1_2</td>
+<td class='tie'>CWT-CNN</td>
+<td>0.15</td>
+<td>826</td>
+<td>15</td>
+<td>-811</td>
+<td>811</td>
+<td>691</td>
+<td>True</td>
+<td>False</td>
+<td class='best'>tie</td>
+</tr>
+<tr>
+<td>secondary_inner_val_calibrated</td>
+<td>1</td>
+<td>bearing1_2</td>
+<td class='tie'>CWT-CNN-LSTM</td>
+<td>0.1</td>
+<td>826</td>
+<td>15</td>
+<td>-811</td>
+<td>811</td>
+<td>811</td>
+<td>True</td>
+<td>False</td>
+<td class='best'>tie</td>
+</tr>
+<tr>
+<td>secondary_inner_val_calibrated</td>
+<td>2</td>
+<td>bearing2_1</td>
+<td>CWT-CNN</td>
+<td>0.1</td>
+<td>151</td>
+<td>201</td>
+<td>50</td>
+<td>50</td>
+<td>0</td>
+<td>False</td>
+<td>False</td>
+<td class='best'>cnn_lstm</td>
+</tr>
+<tr>
+<td>secondary_inner_val_calibrated</td>
+<td>2</td>
+<td>bearing2_1</td>
+<td class='best'>CWT-CNN-LSTM</td>
+<td>0.1</td>
+<td>151</td>
+<td>181</td>
+<td>30</td>
+<td>30</td>
+<td>0</td>
+<td>False</td>
+<td>False</td>
+<td class='best'>cnn_lstm</td>
+</tr>
+<tr>
+<td>secondary_inner_val_calibrated</td>
+<td>3</td>
+<td>bearing2_2</td>
+<td>CWT-CNN</td>
+<td>0.95</td>
+<td>198</td>
+<td>265</td>
+<td>67</td>
+<td>67</td>
+<td>0</td>
+<td>False</td>
+<td>False</td>
+<td class='best'>cnn_lstm</td>
+</tr>
+<tr>
+<td>secondary_inner_val_calibrated</td>
+<td>3</td>
+<td>bearing2_2</td>
+<td class='best'>CWT-CNN-LSTM</td>
+<td>0.1</td>
+<td>198</td>
+<td>199</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>False</td>
+<td>False</td>
+<td class='best'>cnn_lstm</td>
+</tr>
+<tr>
+<td>secondary_inner_val_calibrated</td>
+<td>4</td>
+<td>bearing3_1</td>
+<td class='best'>CWT-CNN</td>
+<td>0.3</td>
+<td>493</td>
+<td>493</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>False</td>
+<td>False</td>
+<td class='best'>cnn</td>
+</tr>
+<tr>
+<td>secondary_inner_val_calibrated</td>
+<td>4</td>
+<td>bearing3_1</td>
+<td>CWT-CNN-LSTM</td>
+<td>0.1</td>
+<td>493</td>
+<td>495</td>
+<td>2</td>
+<td>2</td>
+<td>0</td>
+<td>False</td>
+<td>False</td>
+<td class='best'>cnn</td>
+</tr>
+<tr>
+<td>secondary_inner_val_calibrated</td>
+<td>5</td>
+<td>bearing3_2</td>
+<td class='best'>CWT-CNN</td>
+<td>0.95</td>
+<td>1597</td>
+<td>1609</td>
+<td>12</td>
+<td>12</td>
+<td>0</td>
+<td>False</td>
+<td>False</td>
+<td class='best'>cnn</td>
+</tr>
+<tr>
+<td>secondary_inner_val_calibrated</td>
+<td>5</td>
+<td>bearing3_2</td>
+<td>CWT-CNN-LSTM</td>
+<td>0.85</td>
+<td>1597</td>
+<td>1614</td>
+<td>17</td>
+<td>17</td>
+<td>0</td>
+<td>False</td>
+<td>False</td>
+<td class='best'>cnn</td>
+</tr>
+</tbody></table>
+</body></html>

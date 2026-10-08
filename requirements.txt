@@ -1,0 +1,10 @@
+numpy>=1.26
+pandas>=2.0
+scikit-learn>=1.4
+scikit-image>=0.22
+PyWavelets>=1.5
+matplotlib>=3.8
+torch>=2.1
+pytest>=8.0
+# optional: only for scripts/create_irrms_overview_vector.py
+# PyMuPDF>=1.23

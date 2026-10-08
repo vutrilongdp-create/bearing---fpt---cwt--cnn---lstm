@@ -1,0 +1,292 @@
+{
+  "version": "fpt-fold-scalers-v1",
+  "cache_dir": "/kaggle/input/datasets/longvu274/dataset-slug",
+  "task2_manifest_sha256": "ef61a0a261d1cc19b9a5ae75b3a121b61fa1532969ecb457bf16f7c8a35f1f5f",
+  "canonical_bearings": [
+    "bearing1_1",
+    "bearing1_2",
+    "bearing2_1",
+    "bearing2_2",
+    "bearing3_1",
+    "bearing3_2"
+  ],
+  "scaler_version": "per-channel-zscore-v1",
+  "scaler_kind": "per_channel_zscore",
+  "ddof": 0,
+  "epsilon": 1e-08,
+  "channel_names": [
+    "horizontal",
+    "vertical"
+  ],
+  "frozen_irrms_threshold": 1.2637933790683746,
+  "label_version": "causal-irrms-fpt-reference-v3-q99",
+  "official_data_policy": "closed; learning bearings only",
+  "folds": [
+    {
+      "fold_index": 0,
+      "fit_bearings": [
+        "bearing2_1",
+        "bearing2_2",
+        "bearing3_1",
+        "bearing3_2"
+      ],
+      "inner_val_bearing": "bearing1_2",
+      "outer_test_bearing": "bearing1_1",
+      "scaler_path": "/kaggle/working/fpt_fold_scalers/fold_0_scaler.json",
+      "scaler_sha256": "b8f3c71a2594aae62916242d358a179a8776f4ca24b6fbfe246a45caf67716aa",
+      "postfit_probes": {
+        "all_finite": true,
+        "details": {
+          "bearing1_2": {
+            "indices": [
+              0,
+              435,
+              870
+            ],
+            "finite": true,
+            "shape_ok": true
+          },
+          "bearing1_1": {
+            "indices": [
+              0,
+              1401,
+              2802
+            ],
+            "finite": true,
+            "shape_ok": true
+          }
+        }
+      },
+      "audit_flags": {
+        "train_count_is_four": true,
+        "sets_are_disjoint": true,
+        "outer_not_in_fit": true,
+        "inner_not_in_fit": true,
+        "std_is_valid": true,
+        "postfit_probe_finite": true
+      }
+    },
+    {
+      "fold_index": 1,
+      "fit_bearings": [
+        "bearing1_1",
+        "bearing2_2",
+        "bearing3_1",
+        "bearing3_2"
+      ],
+      "inner_val_bearing": "bearing2_1",
+      "outer_test_bearing": "bearing1_2",
+      "scaler_path": "/kaggle/working/fpt_fold_scalers/fold_1_scaler.json",
+      "scaler_sha256": "dc9efcd8042c8e03550001c1bf66e1f0ff1e13de267753f73c51539c11002cfb",
+      "postfit_probes": {
+        "all_finite": true,
+        "details": {
+          "bearing2_1": {
+            "indices": [
+              0,
+              455,
+              910
+            ],
+            "finite": true,
+            "shape_ok": true
+          },
+          "bearing1_2": {
+            "indices": [
+              0,
+              435,
+              870
+            ],
+            "finite": true,
+            "shape_ok": true
+          }
+        }
+      },
+      "audit_flags": {
+        "train_count_is_four": true,
+        "sets_are_disjoint": true,
+        "outer_not_in_fit": true,
+        "inner_not_in_fit": true,
+        "std_is_valid": true,
+        "postfit_probe_finite": true
+      }
+    },
+    {
+      "fold_index": 2,
+      "fit_bearings": [
+        "bearing1_1",
+        "bearing1_2",
+        "bearing3_1",
+        "bearing3_2"
+      ],
+      "inner_val_bearing": "bearing2_2",
+      "outer_test_bearing": "bearing2_1",
+      "scaler_path": "/kaggle/working/fpt_fold_scalers/fold_2_scaler.json",
+      "scaler_sha256": "ed7fc679fb57f28b431b0066ab437ac6c7647b9cc5aebccb9b66eae130124984",
+      "postfit_probes": {
+        "all_finite": true,
+        "details": {
+          "bearing2_2": {
+            "indices": [
+              0,
+              398,
+              796
+            ],
+            "finite": true,
+            "shape_ok": true
+          },
+          "bearing2_1": {
+            "indices": [
+              0,
+              455,
+              910
+            ],
+            "finite": true,
+            "shape_ok": true
+          }
+        }
+      },
+      "audit_flags": {
+        "train_count_is_four": true,
+        "sets_are_disjoint": true,
+        "outer_not_in_fit": true,
+        "inner_not_in_fit": true,
+        "std_is_valid": true,
+        "postfit_probe_finite": true
+      }
+    },
+    {
+      "fold_index": 3,
+      "fit_bearings": [
+        "bearing1_1",
+        "bearing1_2",
+        "bearing2_1",
+        "bearing3_2"
+      ],
+      "inner_val_bearing": "bearing3_1",
+      "outer_test_bearing": "bearing2_2",
+      "scaler_path": "/kaggle/working/fpt_fold_scalers/fold_3_scaler.json",
+      "scaler_sha256": "b2786fa10f8ecf0c2e0364b3f57c06e62519c4a1ed66264f9a3d761c022555ef",
+      "postfit_probes": {
+        "all_finite": true,
+        "details": {
+          "bearing3_1": {
+            "indices": [
+              0,
+              257,
+              514
+            ],
+            "finite": true,
+            "shape_ok": true
+          },
+          "bearing2_2": {
+            "indices": [
+              0,
+              398,
+              796
+            ],
+            "finite": true,
+            "shape_ok": true
+          }
+        }
+      },
+      "audit_flags": {
+        "train_count_is_four": true,
+        "sets_are_disjoint": true,
+        "outer_not_in_fit": true,
+        "inner_not_in_fit": true,
+        "std_is_valid": true,
+        "postfit_probe_finite": true
+      }
+    },
+    {
+      "fold_index": 4,
+      "fit_bearings": [
+        "bearing1_1",
+        "bearing1_2",
+        "bearing2_1",
+        "bearing2_2"
+      ],
+      "inner_val_bearing": "bearing3_2",
+      "outer_test_bearing": "bearing3_1",
+      "scaler_path": "/kaggle/working/fpt_fold_scalers/fold_4_scaler.json",
+      "scaler_sha256": "51c0d03dcaf6f6ed146139e181d6a0c9c6e8dff49e3124e6eb3135fd314b11a3",
+      "postfit_probes": {
+        "all_finite": true,
+        "details": {
+          "bearing3_2": {
+            "indices": [
+              0,
+              818,
+              1636
+            ],
+            "finite": true,
+            "shape_ok": true
+          },
+          "bearing3_1": {
+            "indices": [
+              0,
+              257,
+              514
+            ],
+            "finite": true,
+            "shape_ok": true
+          }
+        }
+      },
+      "audit_flags": {
+        "train_count_is_four": true,
+        "sets_are_disjoint": true,
+        "outer_not_in_fit": true,
+        "inner_not_in_fit": true,
+        "std_is_valid": true,
+        "postfit_probe_finite": true
+      }
+    },
+    {
+      "fold_index": 5,
+      "fit_bearings": [
+        "bearing1_2",
+        "bearing2_1",
+        "bearing2_2",
+        "bearing3_1"
+      ],
+      "inner_val_bearing": "bearing1_1",
+      "outer_test_bearing": "bearing3_2",
+      "scaler_path": "/kaggle/working/fpt_fold_scalers/fold_5_scaler.json",
+      "scaler_sha256": "8b65fe29b5f49a445eb313348e77a4c478ecd6908d4007a0df449c1f7cc7e457",
+      "postfit_probes": {
+        "all_finite": true,
+        "details": {
+          "bearing1_1": {
+            "indices": [
+              0,
+              1401,
+              2802
+            ],
+            "finite": true,
+            "shape_ok": true
+          },
+          "bearing3_2": {
+            "indices": [
+              0,
+              818,
+              1636
+            ],
+            "finite": true,
+            "shape_ok": true
+          }
+        }
+      },
+      "audit_flags": {
+        "train_count_is_four": true,
+        "sets_are_disjoint": true,
+        "outer_not_in_fit": true,
+        "inner_not_in_fit": true,
+        "std_is_valid": true,
+        "postfit_probe_finite": true
+      }
+    }
+  ],
+  "audit_csv": "/kaggle/working/fpt_fold_scalers/fold_scaler_audit.csv",
+  "audit_csv_sha256": "65ccd1be567ddcae5df11cb35d94a2bc754fc7bd0f9d0eee01fdd29f9c3cadf9"
+}

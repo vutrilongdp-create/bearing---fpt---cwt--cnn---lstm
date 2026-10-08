@@ -1,0 +1,114 @@
+{
+  "version": "fpt-model-contract-v1",
+  "data_dir": "/kaggle/input/dataset-slug",
+  "sequence_length": 16,
+  "encoder_channels": [
+    2,
+    16,
+    32,
+    64,
+    128
+  ],
+  "encoder_dim": 128,
+  "normalization": "GroupNorm(8)",
+  "lstm_hidden_size": 128,
+  "model_seed": 274,
+  "cnn_parameter_count": 97665,
+  "cnn_lstm_parameter_count": 229761,
+  "encoder_parameter_count": 97536,
+  "encoder_hash_cnn": "5151f8c61d5fd771ca9785a9fd2ad88d5d105214db750d960ff7f42b15f06055",
+  "encoder_hash_lstm": "5151f8c61d5fd771ca9785a9fd2ad88d5d105214db750d960ff7f42b15f06055",
+  "target_counts_by_fold": [
+    {
+      "fold_index": 0,
+      "train": 3800,
+      "inner_val": 856,
+      "outer_test": 2788
+    },
+    {
+      "fold_index": 1,
+      "train": 5692,
+      "inner_val": 896,
+      "outer_test": 856
+    },
+    {
+      "fold_index": 2,
+      "train": 5766,
+      "inner_val": 782,
+      "outer_test": 896
+    },
+    {
+      "fold_index": 3,
+      "train": 6162,
+      "inner_val": 500,
+      "outer_test": 782
+    },
+    {
+      "fold_index": 4,
+      "train": 5322,
+      "inner_val": 1622,
+      "outer_test": 500
+    },
+    {
+      "fold_index": 5,
+      "train": 3034,
+      "inner_val": 2788,
+      "outer_test": 1622
+    }
+  ],
+  "smoke_shapes": {
+    "cnn_input": [
+      2,
+      2,
+      128,
+      128
+    ],
+    "lstm_input": [
+      2,
+      16,
+      2,
+      128,
+      128
+    ],
+    "encoder_output": [
+      2,
+      128
+    ],
+    "cnn_logits": [
+      2
+    ],
+    "lstm_logits": [
+      2
+    ]
+  },
+  "input_hashes": {
+    "fold_manifest_sha256": "a3c9697196619b4b820400f660aacaf3d050baa7193b2e0e17a415dc230e6c38",
+    "scaler_sha256": {
+      "0": "b8f3c71a2594aae62916242d358a179a8776f4ca24b6fbfe246a45caf67716aa",
+      "1": "dc9efcd8042c8e03550001c1bf66e1f0ff1e13de267753f73c51539c11002cfb",
+      "2": "ed7fc679fb57f28b431b0066ab437ac6c7647b9cc5aebccb9b66eae130124984",
+      "3": "b2786fa10f8ecf0c2e0364b3f57c06e62519c4a1ed66264f9a3d761c022555ef",
+      "4": "51c0d03dcaf6f6ed146139e181d6a0c9c6e8dff49e3124e6eb3135fd314b11a3",
+      "5": "8b65fe29b5f49a445eb313348e77a4c478ecd6908d4007a0df449c1f7cc7e457"
+    },
+    "cache_sha256": {
+      "bearing1_1": "c521e443342ce3dabe8f17f8e90f05c9e6a62458eca6ca48e6cd33603d062246",
+      "bearing1_2": "e4998f15bc78e68ecfb397dcb0e1c9ae86cfc07b01407031a41f8a464b034c5a",
+      "bearing2_1": "181a5d6ac61984f735c883fd77efbffc1d349b3258e6b2d86cdfae82823ca57c",
+      "bearing2_2": "6ee50c5f019bd5db208623a1d142f16ba026fbd8b2a37e1cbab5640f4a7ee7a1",
+      "bearing3_1": "e68f3f0dd91f0410b00a339c78442a01ca90bb3ab61e8f2a19d83c14370661fb",
+      "bearing3_2": "bbd1ddbecc4fefd3d22d35c27ef717c9d5081cf671ae3f39000ece22d5f2f454"
+    }
+  },
+  "audit_flags": {
+    "cnn_targets_equal_lstm_targets": true,
+    "first_sequence_is_causal": true,
+    "last_sequence_ends_at_last_file": true,
+    "scaled_inputs_finite": true,
+    "encoder_hashes_equal": true,
+    "encoder_parameters_are_distinct": true,
+    "no_batchnorm": true,
+    "forward_shapes_valid": true
+  },
+  "official_data_policy": "closed; learning bearings only"
+}

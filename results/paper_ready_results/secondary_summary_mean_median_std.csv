@@ -1,0 +1,3 @@
+analysis,model_label,n_folds,abs_error_mean,abs_error_median,abs_error_std,signed_delay_mean,signed_delay_median,signed_delay_std,pre_fpt_alarm_runs,missed_detections
+secondary_inner_val_calibrated,CWT-CNN,6,254.833,58.5,322.008,-15.5,31.0,410.352,1,0
+secondary_inner_val_calibrated,CWT-CNN-LSTM,6,452.833,23.5,692.014,-436.167,1.5,702.638,2,0

@@ -1,0 +1,21 @@
+{
+  "fn": 0,
+  "fp": 811,
+  "labels": [
+    "healthy_0",
+    "degraded_1"
+  ],
+  "matrix": [
+    [
+      0,
+      811
+    ],
+    [
+      0,
+      45
+    ]
+  ],
+  "threshold": 0.1,
+  "tn": 0,
+  "tp": 45
+}

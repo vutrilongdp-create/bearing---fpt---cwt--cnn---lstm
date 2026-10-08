@@ -1,0 +1,53 @@
+{
+  "checks": {
+    "cnn_grad_finite": {
+      "detail": "",
+      "passed": true
+    },
+    "cnn_loss_finite": {
+      "detail": "",
+      "passed": true
+    },
+    "cnn_lstm_dataset_alignment": {
+      "detail": "aligned",
+      "passed": true
+    },
+    "cnn_shape": {
+      "detail": "[64] vs [64]",
+      "passed": true
+    },
+    "encoder_hashes_equal": {
+      "detail": "",
+      "passed": true
+    },
+    "fold_manifest_sha256": {
+      "detail": "got a3c9697196619b4b...",
+      "passed": true
+    },
+    "lstm_grad_finite": {
+      "detail": "",
+      "passed": true
+    },
+    "lstm_loss_finite": {
+      "detail": "",
+      "passed": true
+    },
+    "lstm_shape": {
+      "detail": "[64] vs [64]",
+      "passed": true
+    },
+    "model_contract_sha256": {
+      "detail": "got ffda0a69b25b1d99...",
+      "passed": true
+    },
+    "pos_weight_finite": {
+      "detail": "pos_weight_audit=1.6742",
+      "passed": true
+    },
+    "sets_disjoint": {
+      "detail": "",
+      "passed": true
+    }
+  },
+  "passed": true
+}

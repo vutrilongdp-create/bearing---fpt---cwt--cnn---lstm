@@ -1,0 +1,104 @@
+{
+  "best_epoch": 5,
+  "best_val_auc_pr": 1.0,
+  "calibration_warning": [
+    "all_thresholds_have_inner_val_pre_fpt_alarm"
+  ],
+  "checkpoint_provenance": {
+    "analysis_type": "secondary_inner_val_threshold_calibration",
+    "best_epoch": 5,
+    "best_val_auc_pr": 1.0000000000000002,
+    "cache_sha256": {
+      "bearing1_1": "c521e443342ce3dabe8f17f8e90f05c9e6a62458eca6ca48e6cd33603d062246",
+      "bearing1_2": "e4998f15bc78e68ecfb397dcb0e1c9ae86cfc07b01407031a41f8a464b034c5a",
+      "bearing2_1": "181a5d6ac61984f735c883fd77efbffc1d349b3258e6b2d86cdfae82823ca57c",
+      "bearing2_2": "6ee50c5f019bd5db208623a1d142f16ba026fbd8b2a37e1cbab5640f4a7ee7a1",
+      "bearing3_1": "e68f3f0dd91f0410b00a339c78442a01ca90bb3ab61e8f2a19d83c14370661fb",
+      "bearing3_2": "bbd1ddbecc4fefd3d22d35c27ef717c9d5081cf671ae3f39000ece22d5f2f454"
+    },
+    "cache_version": "cwt-unscaled-log-power-v2",
+    "calibration_warning": [
+      "all_thresholds_have_inner_val_pre_fpt_alarm"
+    ],
+    "fit_bearings": [
+      "bearing2_1",
+      "bearing2_2",
+      "bearing3_1",
+      "bearing3_2"
+    ],
+    "fixed_threshold_reference": 0.5,
+    "fold_index": 0,
+    "fold_manifest_sha256": "a3c9697196619b4b820400f660aacaf3d050baa7193b2e0e17a415dc230e6c38",
+    "fpt_consecutive": 5,
+    "inner_val_bearing": "bearing1_2",
+    "label_version": "causal-irrms-fpt-reference-v3-q99",
+    "model_contract_sha256": "ffda0a69b25b1d99c9e5b911be2ca86cff489e53a215baa4343530c70f6b51bd",
+    "model_name": "cnn_lstm",
+    "model_seed": 274,
+    "official_data_policy": "closed; learning bearings only",
+    "outer_test_bearing": "bearing1_1",
+    "scaler_sha256": "b8f3c71a2594aae62916242d358a179a8776f4ca24b6fbfe246a45caf67716aa",
+    "selected_threshold": 0.95,
+    "sequence_length": 16,
+    "task": "fpt_detection",
+    "test_target_count": 2788,
+    "threshold_selection_source": "inner_validation_only",
+    "train_target_count": 3800,
+    "training_seed": 274000,
+    "val_target_count": 856,
+    "version": "fpt-threshold-calibration-checkpoint-v1"
+  },
+  "checkpoint_sha256": "6b5ccd57921071ade55b6abcad5c60578a53e240c0d9300bbc44dd133360b297",
+  "event_metrics": {
+    "abs_fpt_error_files": 1856,
+    "missed_detection": false,
+    "pre_fpt_alarm_run": true,
+    "pre_fpt_positive_sample_count": 1368,
+    "predicted_fpt": 15,
+    "reference_fpt": 1871,
+    "signed_delay_files": -1856,
+    "signed_delay_seconds": -18560
+  },
+  "fold_index": 0,
+  "inner_val_bearing": "bearing1_2",
+  "inner_val_event_metrics_selected": {
+    "abs_fpt_error_files": 801,
+    "missed_detection": false,
+    "pre_fpt_alarm_run": true,
+    "pre_fpt_positive_sample_count": 294,
+    "predicted_fpt": 25,
+    "reference_fpt": 826,
+    "signed_delay_files": -801,
+    "signed_delay_seconds": -8010
+  },
+  "model": "cnn_lstm",
+  "outer_event_metrics_fixed_threshold_0_5": {
+    "abs_fpt_error_files": 1856,
+    "missed_detection": false,
+    "pre_fpt_alarm_run": true,
+    "pre_fpt_positive_sample_count": 1768,
+    "predicted_fpt": 15,
+    "reference_fpt": 1871,
+    "signed_delay_files": -1856,
+    "signed_delay_seconds": -18560
+  },
+  "outer_test_bearing": "bearing1_1",
+  "pos_weight_audit": 1.6742,
+  "sample_metrics": {
+    "auc_pr": 0.35861549725023384,
+    "balanced_accuracy": 0.5237068965517241,
+    "f1": 0.513215859030837,
+    "n_negative": 1856,
+    "n_positive": 932,
+    "n_samples": 2788,
+    "precision": 0.3451851851851852,
+    "recall": 1.0,
+    "roc_auc": 0.6242264965961225
+  },
+  "scaler_sha256": "b8f3c71a2594aae62916242d358a179a8776f4ca24b6fbfe246a45caf67716aa",
+  "selected_threshold": 0.95,
+  "threshold_selection_source": "inner_validation_only",
+  "total_epochs": 14,
+  "training_seed": 274000,
+  "training_time_seconds": 876.6
+}

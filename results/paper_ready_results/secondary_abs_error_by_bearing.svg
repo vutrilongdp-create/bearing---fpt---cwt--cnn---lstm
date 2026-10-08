@@ -1,0 +1,44 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='940' height='500' viewBox='0 0 940 500'>
+<rect width='100%' height='100%' fill='white' />
+<text x='470.0' y='30.0' text-anchor='middle' font-family='Times New Roman, Times, serif' font-size='18' font-weight='bold' fill='#111827'>Secondary calibrated-threshold FPT error</text>
+<line x1='92.0' y1='70.0' x2='92.0' y2='380.0' stroke='#334155' stroke-width='1.4' />
+<line x1='92.0' y1='380.0' x2='882.0' y2='380.0' stroke='#334155' stroke-width='1.4' />
+<line x1='87.0' y1='380.0' x2='882.0' y2='380.0' stroke='#CBD5E1' stroke-width='1.2' />
+<text x='82.0' y='384.0' text-anchor='end' font-family='Times New Roman, Times, serif' font-size='11' font-weight='normal' fill='#111827'>0</text>
+<line x1='87.0' y1='318.0' x2='882.0' y2='318.0' stroke='#CBD5E1' stroke-width='0.8' />
+<text x='82.0' y='322.0' text-anchor='end' font-family='Times New Roman, Times, serif' font-size='11' font-weight='normal' fill='#111827'>427</text>
+<line x1='87.0' y1='256.0' x2='882.0' y2='256.0' stroke='#CBD5E1' stroke-width='0.8' />
+<text x='82.0' y='260.0' text-anchor='end' font-family='Times New Roman, Times, serif' font-size='11' font-weight='normal' fill='#111827'>854</text>
+<line x1='87.0' y1='194.0' x2='882.0' y2='194.0' stroke='#CBD5E1' stroke-width='0.8' />
+<text x='82.0' y='198.0' text-anchor='end' font-family='Times New Roman, Times, serif' font-size='11' font-weight='normal' fill='#111827'>1281</text>
+<line x1='87.0' y1='132.0' x2='882.0' y2='132.0' stroke='#CBD5E1' stroke-width='0.8' />
+<text x='82.0' y='136.0' text-anchor='end' font-family='Times New Roman, Times, serif' font-size='11' font-weight='normal' fill='#111827'>1708</text>
+<line x1='87.0' y1='70.0' x2='882.0' y2='70.0' stroke='#CBD5E1' stroke-width='0.8' />
+<text x='82.0' y='74.0' text-anchor='end' font-family='Times New Roman, Times, serif' font-size='11' font-weight='normal' fill='#111827'>2134</text>
+<text x='487.0' y='450.0' text-anchor='middle' font-family='Times New Roman, Times, serif' font-size='13' font-weight='normal' fill='#111827'>Outer-test bearing</text>
+<text x='34.0' y='225.0' text-anchor='middle' font-family='Times New Roman, Times, serif' font-size='13' fill='#111827' transform='rotate(-90 34.0 225.0)'>Absolute FPT error (files)</text>
+<rect x='117.3' y='294.5' width='36.9' height='85.5' fill='#2563EB' stroke='#111827' stroke-width='2.0' />
+<rect x='161.5' y='110.4' width='36.9' height='269.6' fill='#F97316' stroke='none' stroke-width='0.0' />
+<text x='157.8' y='406.0' text-anchor='end' font-family='Times New Roman, Times, serif' font-size='11' fill='#111827' transform='rotate(-22 157.8 406.0)'>bearing1_1</text>
+<rect x='248.9' y='262.2' width='36.9' height='117.8' fill='#2563EB' stroke='none' stroke-width='0.0' />
+<rect x='293.2' y='262.2' width='36.9' height='117.8' fill='#F97316' stroke='none' stroke-width='0.0' />
+<text x='289.5' y='406.0' text-anchor='end' font-family='Times New Roman, Times, serif' font-size='11' fill='#111827' transform='rotate(-22 289.5 406.0)'>bearing1_2</text>
+<rect x='380.6' y='372.7' width='36.9' height='7.3' fill='#2563EB' stroke='none' stroke-width='0.0' />
+<rect x='424.9' y='375.6' width='36.9' height='4.4' fill='#F97316' stroke='#111827' stroke-width='2.0' />
+<text x='421.2' y='406.0' text-anchor='end' font-family='Times New Roman, Times, serif' font-size='11' fill='#111827' transform='rotate(-22 421.2 406.0)'>bearing2_1</text>
+<rect x='512.3' y='370.3' width='36.9' height='9.7' fill='#2563EB' stroke='none' stroke-width='0.0' />
+<rect x='556.5' y='379.9' width='36.9' height='0.1' fill='#F97316' stroke='#111827' stroke-width='2.0' />
+<text x='552.8' y='406.0' text-anchor='end' font-family='Times New Roman, Times, serif' font-size='11' fill='#111827' transform='rotate(-22 552.8 406.0)'>bearing2_2</text>
+<rect x='643.9' y='380.0' width='36.9' height='0.0' fill='#2563EB' stroke='#111827' stroke-width='2.0' />
+<rect x='688.2' y='379.7' width='36.9' height='0.3' fill='#F97316' stroke='none' stroke-width='0.0' />
+<text x='684.5' y='406.0' text-anchor='end' font-family='Times New Roman, Times, serif' font-size='11' fill='#111827' transform='rotate(-22 684.5 406.0)'>bearing3_1</text>
+<rect x='775.6' y='378.3' width='36.9' height='1.7' fill='#2563EB' stroke='#111827' stroke-width='2.0' />
+<rect x='819.9' y='377.5' width='36.9' height='2.5' fill='#F97316' stroke='none' stroke-width='0.0' />
+<text x='816.2' y='406.0' text-anchor='end' font-family='Times New Roman, Times, serif' font-size='11' fill='#111827' transform='rotate(-22 816.2 406.0)'>bearing3_2</text>
+<rect x='310' y='427' width='14' height='14' fill='#2563EB' />
+<text x='330.0' y='440.0' text-anchor='start' font-family='Times New Roman, Times, serif' font-size='12' font-weight='normal' fill='#111827'>CWT-CNN</text>
+<rect x='455' y='427' width='14' height='14' fill='#F97316' />
+<text x='475.0' y='440.0' text-anchor='start' font-family='Times New Roman, Times, serif' font-size='12' font-weight='normal' fill='#111827'>CWT-CNN-LSTM</text>
+<rect x='650' y='426' width='16' height='16' fill='white' stroke='#111827' stroke-width='2' />
+<text x='672.0' y='440.0' text-anchor='start' font-family='Times New Roman, Times, serif' font-size='12' font-weight='normal' fill='#111827'>lower error per bearing</text>
+</svg>

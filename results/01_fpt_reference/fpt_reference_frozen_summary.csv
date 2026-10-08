@@ -1,0 +1,7 @@
+bearing_id,n_files,fpt_index,fpt_seconds,healthy_count,degraded_count,degraded_ratio,baseline_alarm_runs,rejected_recovery_count,labels_path
+bearing1_1,2803,1871,18710,1871,932,0.3325008919015341,0,1,/kaggle/working/causal_irrms_fpt_reference/bearing1_1_fpt_labels.npz
+bearing1_2,871,826,8260,826,45,0.05166475315729047,0,2,/kaggle/working/causal_irrms_fpt_reference/bearing1_2_fpt_labels.npz
+bearing2_1,911,151,1510,151,760,0.8342480790340285,0,0,/kaggle/working/causal_irrms_fpt_reference/bearing2_1_fpt_labels.npz
+bearing2_2,797,198,1980,198,599,0.7515683814303639,0,0,/kaggle/working/causal_irrms_fpt_reference/bearing2_2_fpt_labels.npz
+bearing3_1,515,493,4930,493,22,0.04271844660194175,0,0,/kaggle/working/causal_irrms_fpt_reference/bearing3_1_fpt_labels.npz
+bearing3_2,1637,1597,15970,1597,40,0.02443494196701283,0,1,/kaggle/working/causal_irrms_fpt_reference/bearing3_2_fpt_labels.npz

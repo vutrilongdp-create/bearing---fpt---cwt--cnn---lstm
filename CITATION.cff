@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the paper below."
+title: "Bearing degradation-onset (FPT) detection with CWT images, CNN and CNN-LSTM"
+authors:
+  - family-names: Vu
+    given-names: Tri Long
+    affiliation: University of Transport and Communications
+license: MIT
+preferred-citation:
+  type: conference-paper
+  title: "Remaining Useful Life Prediction of Rotating Equipment in Mining Applications Using Vibration Signals and a CNN-LSTM Model"
+  authors:
+    - family-names: Pham
+      given-names: Thi Thanh Loan
+      affiliation: Hanoi University of Mining and Geology
+    - family-names: Vu
+      given-names: Tri Long
+      affiliation: University of Transport and Communications
+    - family-names: Ngo
+      given-names: Ba Hung
+      affiliation: Thanh Dong University
+  collection-title: "National Conference on Earth and Resource Sciences for Sustainable Development (ERSD 2026)"
+  year: 2026
