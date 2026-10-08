@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 
 
-NOTEBOOK = Path(__file__).parents[1] / "notebooks" / "hi_fpt_prepare_kaggle_vhi2.ipynb"
+NOTEBOOK = Path(__file__).parents[1] / "notebooks" / "exploratory" / "e3_ewma_hi_fpt_audit_v2.ipynb"
 
 
 def test_hi_only_notebook_has_no_cwt_computation():

@@ -13,7 +13,7 @@ data/
 *.zip
 results/**/*_cwt_unscaled.npz
 
-# Generated upscaled copies (rebuild with scripts/create_300dpi_paper_images.py)
+# Generated upscaled copies (rebuild with scripts/export_figures_300dpi.py)
 results/paper_300dpi_images/
 
 # OS / editor

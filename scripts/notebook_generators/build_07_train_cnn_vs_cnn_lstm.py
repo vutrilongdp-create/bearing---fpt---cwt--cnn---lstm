@@ -1,4 +1,4 @@
-"""Generate 06_calibrated_threshold_fpt_analysis_kaggle.ipynb deterministically."""
+"""Generate 07_train_cnn_vs_cnn_lstm.ipynb deterministically."""
 
 from __future__ import annotations
 
@@ -20,15 +20,14 @@ def code(source: str) -> dict[str, object]:
 cells = [
     # ── Cell 1: Header ───────────────────────────────────────────────
     md("""\
-# Task 6 — Inner-Validation Threshold Calibration for FPT Detection
+# Task 5 — Fair CNN vs CNN-LSTM Training for FPT Detection
 
-Secondary analysis for CNN vs CNN-LSTM FPT detection. Training matches Task 5,
-but the event decision threshold is selected from the inner-validation bearing
-only and then applied once to the outer-test bearing.
+Compare single-image CNN and causal 16-image CNN-LSTM on the same frozen
+data/model contracts. Uses 6-fold leave-one-bearing-out with outer-test
+excluded from all fitting decisions.
 
 **Protocol**: smoke gate → 1-fold pilot → 6 folds × 2 models.
-Keep `PILOT_ONLY = True` for the first Kaggle smoke run; switch to `False`
-only after reviewing pilot threshold-calibration artifacts."""),
+Set `PILOT_ONLY = False` after reviewing pilot results to run all folds."""),
 
     # ── Cell 2: Imports + frozen configuration ────────────────────────
     code("""\
@@ -40,7 +39,6 @@ import json
 import os
 import random
 import time
-import zipfile
 from pathlib import Path
 
 import matplotlib.pyplot as plt
@@ -57,14 +55,13 @@ from sklearn.metrics import (
 )
 
 # ── Execution mode ──
-PILOT_ONLY = True
+PILOT_ONLY = False
 PILOT_FOLD = 4
 
 # ── Paths ──
 KAGGLE_INPUT_ROOT = Path('/kaggle/input')
-DATA_DIR_ENV_VAR = 'FPT_TASK6_DATA_DIR'
-OUT_DIR = Path('/kaggle/working/fpt_threshold_calibration/')
-ZIP_PATH = Path('/kaggle/working/fpt_threshold_calibration_artifacts.zip')
+DATA_DIR_ENV_VAR = 'FPT_TASK5_DATA_DIR'
+OUT_DIR = Path('/kaggle/working/fpt_training/')
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # ── Frozen data constants ──
@@ -99,17 +96,8 @@ WEIGHT_DECAY = 1e-4
 MAX_EPOCHS = 50
 PATIENCE = 8
 PROBABILITY_THRESHOLD = 0.5
-FIXED_THRESHOLD_REFERENCE = 0.5
 FPT_CONSECUTIVE = 5
 FILE_INTERVAL_SECONDS = 10
-THRESHOLD_GRID = [round(float(x), 2) for x in np.arange(0.10, 0.951, 0.05)]
-CALIBRATION_SELECTION_RULE = [
-    'prefer_not_missed',
-    'prefer_no_pre_fpt_alarm_run',
-    'minimize_abs_fpt_error_files',
-    'minimize_pre_fpt_positive_sample_count',
-    'prefer_higher_threshold',
-]
 
 # ── Frozen provenance hashes ──
 EXPECTED_FOLD_MANIFEST_SHA256 = 'a3c9697196619b4b820400f660aacaf3d050baa7193b2e0e17a415dc230e6c38'
@@ -145,11 +133,11 @@ def discover_data_dir() -> Path:
         return candidates[0]
     if len(candidates) > 1:
         raise RuntimeError(
-            'Multiple Task6 input datasets found. Set '
+            'Multiple Task5 input datasets found. Set '
             f'{DATA_DIR_ENV_VAR} to one of: {[str(p) for p in candidates]}'
         )
     raise FileNotFoundError(
-        'Could not auto-discover Task6 input dataset under /kaggle/input. '
+        'Could not auto-discover Task5 input dataset under /kaggle/input. '
         f'Attach the dataset containing CWT cache + fold scalers + model_contract, '
         f'or set {DATA_DIR_ENV_VAR}.'
     )
@@ -165,8 +153,7 @@ torch.backends.cudnn.benchmark = False
 print('Device:', DEVICE)
 print('PILOT_ONLY:', PILOT_ONLY, '  PILOT_FOLD:', PILOT_FOLD)
 print('DATA_DIR:', DATA_DIR)
-print('OUT_DIR:', OUT_DIR)
-print('ZIP_PATH:', ZIP_PATH)"""),
+print('OUT_DIR:', OUT_DIR)"""),
 
     # ── Cell 3: Pure data helpers ────────────────────────────────────
     code("""\
@@ -222,29 +209,6 @@ def atomic_write_json(path: Path, payload: dict) -> None:
     temp_path = path.with_suffix(path.suffix + '.tmp')
     temp_path.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding='utf-8')
     temp_path.replace(path)
-
-
-def create_artifact_zip(source_dir: Path, zip_path: Path) -> dict:
-    if not source_dir.exists():
-        raise FileNotFoundError(source_dir)
-    if zip_path.exists():
-        zip_path.unlink()
-
-    members = []
-    with zipfile.ZipFile(zip_path, mode='w', compression=zipfile.ZIP_DEFLATED) as archive:
-        for path in sorted(source_dir.rglob('*')):
-            if not path.is_file():
-                continue
-            arcname = path.relative_to(source_dir.parent).as_posix()
-            archive.write(path, arcname=arcname)
-            members.append(arcname)
-
-    return {
-        'zip_path': str(zip_path),
-        'source_dir': str(source_dir),
-        'n_files': len(members),
-        'members': members,
-    }
 
 
 def load_npz_payload(path: Path) -> dict:
@@ -641,12 +605,12 @@ def compute_pre_fpt_alarm_run(file_indices, y_prob, reference_fpt, threshold=0.5
     ) is not None
 
 
-def evaluate_records(model, loader, device):
-    '''Evaluate model and return records sorted by file_index.'''
+def evaluate_outer_test(model, test_loader, device):
+    '''Evaluate model on outer-test, return records sorted by file_index.'''
     model.eval()
     records = []
     with torch.no_grad():
-        for x, y, meta in loader:
+        for x, y, meta in test_loader:
             x = x.to(device)
             logits = model(x)
             logits_np = logits.cpu().numpy()
@@ -702,91 +666,6 @@ def compute_event_metrics(records, reference_fpt,
         'pre_fpt_alarm_run': bool(pre_fpt_alarm_run),
         'missed_detection': False,
     }
-
-
-def threshold_sort_key(row):
-    metrics = row['inner_val_event_metrics']
-    missed = bool(metrics['missed_detection'])
-    pre_alarm = bool(metrics['pre_fpt_alarm_run'])
-    abs_error = metrics['abs_fpt_error_files']
-    if abs_error is None:
-        abs_error = 10**9
-    return (
-        int(missed),
-        int(pre_alarm),
-        int(abs_error),
-        int(metrics['pre_fpt_positive_sample_count']),
-        -float(row['threshold']),
-    )
-
-
-def select_threshold_from_inner_val(records, reference_fpt, threshold_grid=THRESHOLD_GRID):
-    '''Select event threshold using inner-validation records only.'''
-    scan_rows = []
-    for threshold in threshold_grid:
-        event_metrics = compute_event_metrics(
-            records,
-            reference_fpt=reference_fpt,
-            threshold=float(threshold),
-            consecutive=FPT_CONSECUTIVE,
-            interval=FILE_INTERVAL_SECONDS,
-        )
-        row = {
-            'threshold': float(threshold),
-            'inner_val_event_metrics': event_metrics,
-        }
-        row['sort_key'] = threshold_sort_key(row)
-        scan_rows.append(row)
-
-    selected = min(scan_rows, key=threshold_sort_key)
-    warnings = []
-    if all(row['inner_val_event_metrics']['missed_detection'] for row in scan_rows):
-        warnings.append('all_thresholds_missed_inner_val')
-    if all(row['inner_val_event_metrics']['pre_fpt_alarm_run'] for row in scan_rows):
-        warnings.append('all_thresholds_have_inner_val_pre_fpt_alarm')
-
-    return {
-        'selected_threshold': float(selected['threshold']),
-        'inner_val_event_metrics': selected['inner_val_event_metrics'],
-        'threshold_scan': scan_rows,
-        'calibration_warning': warnings,
-        'selection_rule': CALIBRATION_SELECTION_RULE,
-    }
-
-
-def flatten_event_metrics(prefix, metrics):
-    return {
-        f'{prefix}_reference_fpt': metrics['reference_fpt'],
-        f'{prefix}_predicted_fpt': metrics['predicted_fpt'],
-        f'{prefix}_signed_delay_files': metrics['signed_delay_files'],
-        f'{prefix}_signed_delay_seconds': metrics['signed_delay_seconds'],
-        f'{prefix}_abs_fpt_error_files': metrics['abs_fpt_error_files'],
-        f'{prefix}_pre_fpt_positive_sample_count': metrics['pre_fpt_positive_sample_count'],
-        f'{prefix}_pre_fpt_alarm_run': metrics['pre_fpt_alarm_run'],
-        f'{prefix}_missed_detection': metrics['missed_detection'],
-    }
-
-
-def write_threshold_scan_csv(scan_rows, out_path: Path):
-    fieldnames = [
-        'threshold',
-        'inner_val_reference_fpt',
-        'inner_val_predicted_fpt',
-        'inner_val_signed_delay_files',
-        'inner_val_signed_delay_seconds',
-        'inner_val_abs_fpt_error_files',
-        'inner_val_pre_fpt_positive_sample_count',
-        'inner_val_pre_fpt_alarm_run',
-        'inner_val_missed_detection',
-        'sort_key',
-    ]
-    with open(out_path, 'w', newline='', encoding='utf-8') as handle:
-        writer = csv.DictWriter(handle, fieldnames=fieldnames)
-        writer.writeheader()
-        for row in scan_rows:
-            flat = {'threshold': row['threshold'], 'sort_key': repr(row['sort_key'])}
-            flat.update(flatten_event_metrics('inner_val', row['inner_val_event_metrics']))
-            writer.writerow(flat)
 
 
 def save_confusion_matrix_artifacts(y_true, y_prob, threshold, out_prefix: Path):
@@ -1053,24 +932,10 @@ def train_fold_model(fold_idx, model_name, fold_manifest, scalers,
     model.load_state_dict(best_state)
     checkpoint_hash = state_dict_sha256(best_state)
 
-    # ── Select threshold from INNER-VALIDATION only ──
-    inner_val_loader = DataLoader(val_ds, batch_size=BATCH_SIZE, shuffle=False,
-                                  num_workers=0, pin_memory=True)
-    inner_val_records = evaluate_records(model, inner_val_loader, DEVICE)
-    inner_val_reference_fpt = cache_by_bearing[fold['inner_val_bearing']]['fpt_index']
-    selected_threshold_info = select_threshold_from_inner_val(
-        inner_val_records,
-        reference_fpt=inner_val_reference_fpt,
-        threshold_grid=THRESHOLD_GRID,
-    )
-    selected_threshold = float(selected_threshold_info['selected_threshold'])
-    print(f'Selected threshold from inner-val: {selected_threshold:.2f}')
-    print(f'Calibration warnings: {selected_threshold_info["calibration_warning"]}')
-
     # ── Evaluate outer-test ONCE (all decisions frozen) ──
     test_loader = DataLoader(test_ds, batch_size=BATCH_SIZE, shuffle=False,
                              num_workers=0, pin_memory=True)
-    test_records = evaluate_records(model, test_loader, DEVICE)
+    test_records = evaluate_outer_test(model, test_loader, DEVICE)
     test_y_true = np.array([r['y_true'] for r in test_records])
     test_y_logit = np.array([r['y_logit'] for r in test_records])
     test_y_prob = np.array([r['y_prob'] for r in test_records])
@@ -1079,23 +944,11 @@ def train_fold_model(fold_idx, model_name, fold_manifest, scalers,
 
     sample_metrics = compute_sample_metrics(test_y_true, test_y_prob)
     ref_fpt = cache_by_bearing[outer_bearing]['fpt_index']
-    outer_event_metrics_fixed = compute_event_metrics(
-        test_records,
-        ref_fpt,
-        threshold=FIXED_THRESHOLD_REFERENCE,
-        consecutive=FPT_CONSECUTIVE,
-    )
-    outer_event_metrics_calibrated = compute_event_metrics(
-        test_records,
-        ref_fpt,
-        threshold=selected_threshold,
-        consecutive=FPT_CONSECUTIVE,
-    )
-    event_metrics = outer_event_metrics_calibrated
+    event_metrics = compute_event_metrics(test_records, ref_fpt)
 
     training_time = time.time() - t0
     print(f'\\nOuter-test sample metrics: {json.dumps(sample_metrics, indent=2)}')
-    print(f'Outer-test calibrated event metrics:  {json.dumps(event_metrics, indent=2)}')
+    print(f'Outer-test event metrics:  {json.dumps(event_metrics, indent=2)}')
     print(f'Training time: {training_time:.1f}s')
 
     # ── Save artifacts ──
@@ -1111,9 +964,8 @@ def train_fold_model(fold_idx, model_name, fold_manifest, scalers,
     # Best checkpoint
     ckpt_path = prefix.with_name(f'{prefix.name}_best.pt')
     checkpoint_provenance = {
-        'version': 'fpt-threshold-calibration-checkpoint-v1',
+        'version': 'fpt-training-checkpoint-v2',
         'task': 'fpt_detection',
-        'analysis_type': 'secondary_inner_val_threshold_calibration',
         'fold_index': fold_idx,
         'model_name': model_name,
         'fit_bearings': list(fold['fit_bearings']),
@@ -1133,10 +985,7 @@ def train_fold_model(fold_idx, model_name, fold_manifest, scalers,
         'model_seed': MODEL_SEED,
         'training_seed': train_seed,
         'sequence_length': SEQUENCE_LENGTH,
-        'fixed_threshold_reference': FIXED_THRESHOLD_REFERENCE,
-        'selected_threshold': selected_threshold,
-        'threshold_selection_source': 'inner_validation_only',
-        'calibration_warning': selected_threshold_info['calibration_warning'],
+        'probability_threshold': PROBABILITY_THRESHOLD,
         'fpt_consecutive': FPT_CONSECUTIVE,
         'official_data_policy': 'closed; learning bearings only',
     }
@@ -1155,25 +1004,9 @@ def train_fold_model(fold_idx, model_name, fold_manifest, scalers,
              y_true=test_y_true, y_logit=test_y_logit, y_prob=test_y_prob,
              file_index=test_file_idx, target_index=test_target_idx,
              bearing_id=np.array([outer_bearing]))
-
-    # Inner-validation predictions used for threshold selection
-    inner_val_pred_path = prefix.with_name(f'{prefix.name}_inner_val_predictions.npz')
-    np.savez(
-        inner_val_pred_path,
-        y_true=np.array([r['y_true'] for r in inner_val_records]),
-        y_logit=np.array([r['y_logit'] for r in inner_val_records]),
-        y_prob=np.array([r['y_prob'] for r in inner_val_records]),
-        file_index=np.array([r['file_index'] for r in inner_val_records]),
-        target_index=np.array([r['target_index'] for r in inner_val_records]),
-        bearing_id=np.array([fold['inner_val_bearing']]),
-    )
-
-    # Inner-validation threshold scan
-    threshold_scan_path = prefix.with_name(f'{prefix.name}_inner_val_threshold_scan.csv')
-    write_threshold_scan_csv(selected_threshold_info['threshold_scan'], threshold_scan_path)
              
     # Confusion Matrix
-    save_confusion_matrix_artifacts(test_y_true, test_y_prob, selected_threshold, prefix)
+    save_confusion_matrix_artifacts(test_y_true, test_y_prob, PROBABILITY_THRESHOLD, prefix)
     
     # Probability / FPT timeline plot
     save_fpt_probability_plot(
@@ -1181,22 +1014,10 @@ def train_fold_model(fold_idx, model_name, fold_manifest, scalers,
         y_true=test_y_true,
         y_prob=test_y_prob,
         reference_fpt=ref_fpt,
-        predicted_fpt=outer_event_metrics_calibrated['predicted_fpt'],
-        threshold=selected_threshold,
+        predicted_fpt=event_metrics['predicted_fpt'],
+        threshold=PROBABILITY_THRESHOLD,
         out_path=prefix.with_name(f'{prefix.name}_probability_plot.png'),
-        title=f'{model_name.upper()} | fold {fold_idx} | outer-test {outer_bearing} | calibrated threshold',
-    )
-
-    # Inner-validation threshold calibration plot
-    save_fpt_probability_plot(
-        file_indices=np.array([r['file_index'] for r in inner_val_records]),
-        y_true=np.array([r['y_true'] for r in inner_val_records]),
-        y_prob=np.array([r['y_prob'] for r in inner_val_records]),
-        reference_fpt=inner_val_reference_fpt,
-        predicted_fpt=selected_threshold_info['inner_val_event_metrics']['predicted_fpt'],
-        threshold=selected_threshold,
-        out_path=prefix.with_name(f'{prefix.name}_inner_val_calibration_plot.png'),
-        title=f'{model_name.upper()} | fold {fold_idx} | inner-val {fold["inner_val_bearing"]} | inner-validation threshold calibration',
+        title=f'{model_name.upper()} | fold {fold_idx} | outer-test {outer_bearing}',
     )
 
     # Metrics JSON
@@ -1204,15 +1025,9 @@ def train_fold_model(fold_idx, model_name, fold_manifest, scalers,
         'fold_index': fold_idx,
         'model': model_name,
         'outer_test_bearing': outer_bearing,
-        'inner_val_bearing': fold['inner_val_bearing'],
         'best_epoch': best_epoch,
         'best_val_auc_pr': round(stopper.best_value, 6),
         'total_epochs': len(history),
-        'selected_threshold': selected_threshold,
-        'threshold_selection_source': 'inner_validation_only',
-        'calibration_warning': selected_threshold_info['calibration_warning'],
-        'inner_val_event_metrics_selected': selected_threshold_info['inner_val_event_metrics'],
-        'outer_event_metrics_fixed_threshold_0_5': outer_event_metrics_fixed,
         'sample_metrics': sample_metrics,
         'event_metrics': event_metrics,
         'checkpoint_sha256': checkpoint_hash,
@@ -1253,9 +1068,8 @@ print('  All input hashes verified.')
 
 # Save frozen training protocol config BEFORE any training
 protocol_config = {
-    'version': 'fpt-threshold-calibration-protocol-v1',
+    'version': 'fpt-training-protocol-v2',
     'task': 'fpt_detection',
-    'analysis_type': 'secondary_inner_val_threshold_calibration',
     'models': ['cnn', 'cnn_lstm'],
     'pilot_only': PILOT_ONLY,
     'pilot_fold': PILOT_FOLD,
@@ -1274,17 +1088,11 @@ protocol_config = {
     'loss_pos_weight': None,
     'optimizer': 'AdamW',
     'probability_threshold': PROBABILITY_THRESHOLD,
-    'fixed_threshold_reference': FIXED_THRESHOLD_REFERENCE,
-    'threshold_grid': THRESHOLD_GRID,
-    'calibration_selection_rule': CALIBRATION_SELECTION_RULE,
-    'threshold_selection_source': 'inner_validation_only',
-    'outer_test_policy': 'evaluate_once_after_threshold_selection',
     'fpt_consecutive': FPT_CONSECUTIVE,
     'sampler': 'WeightedRandomSampler_bearing_class_groups',
     'pos_weight_source': 'training_labels_only_for_audit',
     'data_dir': str(DATA_DIR),
     'data_dir_env_var': DATA_DIR_ENV_VAR,
-    'download_zip_path': str(ZIP_PATH),
     'required_input_files': required_input_files(),
     'fold_manifest_sha256': input_hashes['fold_manifest_sha256'],
     'model_contract_sha256': input_hashes['model_contract_sha256'],
@@ -1292,8 +1100,8 @@ protocol_config = {
     'cache_version': CACHE_VERSION,
     'official_data_policy': 'closed; learning bearings only',
 }
-atomic_write_json(OUT_DIR / 'threshold_calibration_protocol_config.json', protocol_config)
-print('Saved threshold_calibration_protocol_config.json')
+atomic_write_json(OUT_DIR / 'training_protocol_config.json', protocol_config)
+print('Saved training_protocol_config.json')
 
 # Run smoke gate
 smoke_report = run_smoke_gate(fold_manifest, scalers, input_hashes, cache_by_bearing)"""),
@@ -1337,40 +1145,18 @@ def aggregate_results(results, model_name):
             agg[f'{key}_mean'] = None
             agg[f'{key}_std'] = None
 
-    abs_errors = [
-        r['event_metrics']['abs_fpt_error_files']
-        for r in model_results
-        if r['event_metrics']['abs_fpt_error_files'] is not None
-    ]
-    signed_delays = [
-        r['event_metrics']['signed_delay_files']
-        for r in model_results
-        if r['event_metrics']['signed_delay_files'] is not None
-    ]
-    selected_thresholds = [r['selected_threshold'] for r in model_results]
+    abs_errors = [r['event_metrics']['abs_fpt_error_files']
+                  for r in model_results
+                  if r['event_metrics']['abs_fpt_error_files'] is not None]
+    if abs_errors:
+        agg['abs_fpt_error_mean'] = round(float(np.mean(abs_errors)), 1)
+        agg['abs_fpt_error_std'] = round(float(np.std(abs_errors)), 1)
+    else:
+        agg['abs_fpt_error_mean'] = None
+        agg['abs_fpt_error_std'] = None
 
-    agg['abs_fpt_error_mean'] = round(float(np.mean(abs_errors)), 1) if abs_errors else None
-    agg['abs_fpt_error_std'] = round(float(np.std(abs_errors)), 1) if abs_errors else None
-    agg['signed_delay_mean'] = round(float(np.mean(signed_delays)), 1) if signed_delays else None
-    agg['signed_delay_std'] = round(float(np.std(signed_delays)), 1) if signed_delays else None
-    agg['selected_threshold_mean'] = round(float(np.mean(selected_thresholds)), 3)
-    agg['selected_threshold_std'] = round(float(np.std(selected_thresholds)), 3)
-    agg['missed_detections'] = sum(1 for r in model_results if r['event_metrics']['missed_detection'])
-    agg['pre_fpt_alarm_runs'] = sum(1 for r in model_results if r['event_metrics']['pre_fpt_alarm_run'])
-    agg['early_detections'] = sum(
-        1 for r in model_results
-        if r['event_metrics']['signed_delay_files'] is not None
-        and r['event_metrics']['signed_delay_files'] < 0
-    )
-    agg['late_detections'] = sum(
-        1 for r in model_results
-        if r['event_metrics']['signed_delay_files'] is not None
-        and r['event_metrics']['signed_delay_files'] > 0
-    )
-    agg['exact_detections'] = sum(
-        1 for r in model_results
-        if r['event_metrics']['signed_delay_files'] == 0
-    )
+    missed = sum(1 for r in model_results if r['event_metrics']['missed_detection'])
+    agg['missed_detections'] = missed
     agg['total_folds'] = len(model_results)
     return agg
 
@@ -1388,7 +1174,7 @@ for model_name in ['cnn', 'cnn_lstm']:
 # Per-fold detail table
 print('\\n=== Per-fold results ===')
 print(f'{" Fold":>5} {"Model":>10} {"AUC-PR":>8} {"F1":>8} {"Ref FPT":>8} '
-      f'{"Thr":>5} {"Pred FPT":>9} {"Delay":>7} {"Missed":>7}')
+      f'{"Pred FPT":>9} {"Delay":>7} {"Missed":>7}')
 for r in sorted(all_results, key=lambda x: (x['fold_index'], x['model'])):
     sm = r['sample_metrics']
     em = r['event_metrics']
@@ -1398,37 +1184,30 @@ for r in sorted(all_results, key=lambda x: (x['fold_index'], x['model'])):
     delay = str(em['signed_delay_files']) if em['signed_delay_files'] is not None else 'N/A'
     missed = 'YES' if em['missed_detection'] else 'no'
     print(f'{r["fold_index"]:>5} {r["model"]:>10} {aucpr:>8} {f1:>8} '
-          f'{em["reference_fpt"]:>8} {r["selected_threshold"]:>5.2f} {pred:>9} {delay:>7} {missed:>7}')
+          f'{em["reference_fpt"]:>8} {pred:>9} {delay:>7} {missed:>7}')
 
 # Save manifest
 manifest = {
-    'version': 'fpt-threshold-calibration-manifest-v1',
-    'analysis_type': 'secondary_inner_val_threshold_calibration',
+    'version': 'fpt-training-manifest-v2',
     'pilot_only': PILOT_ONLY,
     'fold_indices': fold_indices,
     'n_runs': len(all_results),
     'per_fold_results': all_results,
     'summary': summary,
-    'protocol_config_path': str(OUT_DIR / 'threshold_calibration_protocol_config.json'),
-    'download_zip_path': str(ZIP_PATH),
+    'protocol_config_path': str(OUT_DIR / 'training_protocol_config.json'),
     'official_data_policy': 'closed; learning bearings only',
-    'threshold_selection_source': 'inner_validation_only',
 }
-manifest_path = OUT_DIR / 'threshold_calibration_manifest.json'
+manifest_path = OUT_DIR / 'training_run_manifest.json'
 atomic_write_json(manifest_path, manifest)
 print(f'\\nSaved: {manifest_path}')
 
 # Save summary metrics
 if summary:
-    summary_path = OUT_DIR / 'summary_metrics_calibrated.json'
+    summary_path = OUT_DIR / 'summary_metrics.json'
     atomic_write_json(summary_path, summary)
     print(f'Saved: {summary_path}')
 
-zip_report = create_artifact_zip(OUT_DIR, ZIP_PATH)
-print(f'Saved downloadable zip: {ZIP_PATH}')
-print(f'Zip artifact count: {zip_report["n_files"]}')
-
-print('\\n=== Task 6 threshold calibration complete ===')"""),
+print('\\n=== Task 5 complete ===')"""),
 ]
 
 # ── Write notebook ────────────────────────────────────────────────────
@@ -1443,6 +1222,6 @@ notebook = {
     "nbformat_minor": 5,
 }
 
-output = Path(__file__).resolve().parents[2] / "notebooks" / "06_calibrated_threshold_fpt_analysis_kaggle.ipynb"
+output = Path(__file__).resolve().parents[2] / "notebooks" / "07_train_cnn_vs_cnn_lstm.ipynb"
 output.write_text(json.dumps(notebook, ensure_ascii=False, indent=1), encoding="utf-8")
 print(f"Wrote {output.name}  ({len(cells)} cells)")

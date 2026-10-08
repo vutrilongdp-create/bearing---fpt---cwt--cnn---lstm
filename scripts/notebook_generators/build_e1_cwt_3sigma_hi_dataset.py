@@ -70,10 +70,9 @@ print("Imports OK")"""
     ),
     code(
         """# ─── 2) Paths & configuration ─────────────────────────────────────────────
-# V-HI2: FPT requires 5 consecutive exceedances plus 20/30 confirmation.
 # Kaggle input folder containing bearing1_1.pkz, bearing1_2.pkz, ...
 MAIN_DIR = Path('/kaggle/input/datasets/longvu274/train-dataset/')
-OUT_DIR = Path('/kaggle/working/cwt_hi_dataset_vhi2/')
+OUT_DIR = Path('/kaggle/working/cwt_hi_dataset/')
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # 5 train bearings + 1 validation/test nội bộ
@@ -94,8 +93,6 @@ HEALTHY_FILES = 200          # baseline đầu đời dùng cho 3-sigma
 EWMA_ALPHA = 0.08            # causal smoothing
 HI_SIGMA_SPAN = 6.0          # HI=1 khi RMS_EWMA vượt threshold khoảng 6 sigma
 FPT_CONSECUTIVE = 5          # xác nhận FPT khi vượt ngưỡng đủ 5 mẫu liên tiếp
-FPT_CONFIRM_WINDOW = 30      # cửa sổ xác nhận sau ứng viên FPT
-FPT_CONFIRM_REQUIRED = 20    # tối thiểu 20/30 mẫu phải vượt ngưỡng
 EPS = 1e-8
 
 # Signal mode:
@@ -264,34 +261,22 @@ def ewma_causal(x: np.ndarray, alpha: float = EWMA_ALPHA) -> np.ndarray:
     return y
 
 
-def find_confirmed_fpt(
+def find_persistent_fpt(
     values: np.ndarray,
     threshold: float,
     start_index: int,
     consecutive: int = FPT_CONSECUTIVE,
-    confirm_window: int = FPT_CONFIRM_WINDOW,
-    confirm_required: int = FPT_CONFIRM_REQUIRED,
 ):
-    \"\"\"Return first FPT passing both 5-run and 20/30 confirmation.\"\"\"
+    \"\"\"Return the first index of a persistent threshold exceedance, or None.\"\"\"
     values = np.asarray(values)
     consecutive = int(consecutive)
-    confirm_window = int(confirm_window)
-    confirm_required = int(confirm_required)
     if consecutive < 1:
         raise ValueError('consecutive must be at least 1')
-    if confirm_window < consecutive:
-        raise ValueError('confirm_window must be at least consecutive')
-    if not 1 <= confirm_required <= confirm_window:
-        raise ValueError('confirm_required must be in [1, confirm_window]')
 
     first = max(0, int(start_index))
-    last_start = len(values) - confirm_window
-    above = values > threshold
+    last_start = len(values) - consecutive
     for i in range(first, last_start + 1):
-        first_run_ok = np.all(above[i:i + consecutive])
-        confirmation_ok = np.count_nonzero(above[i:i + confirm_window]) >= confirm_required
-        window_ends_above = bool(above[i + confirm_window - 1])
-        if first_run_ok and confirmation_ok and window_ends_above:
+        if np.all(values[i:i + consecutive] > threshold):
             return i
     return None
 
@@ -320,13 +305,11 @@ def build_hi_from_rms(
 
     smooth = ewma_causal(rms_values, alpha=alpha)
 
-    fpt_idx = find_confirmed_fpt(
+    fpt_idx = find_persistent_fpt(
         smooth,
         threshold=threshold,
         start_index=n_healthy,
         consecutive=FPT_CONSECUTIVE,
-        confirm_window=FPT_CONFIRM_WINDOW,
-        confirm_required=FPT_CONFIRM_REQUIRED,
     )
     fpt_found = fpt_idx is not None
 
@@ -348,8 +331,6 @@ def build_hi_from_rms(
         'fpt_index': int(fpt_idx) if fpt_found else None,
         'fpt_found': bool(fpt_found),
         'fpt_consecutive': int(FPT_CONSECUTIVE),
-        'fpt_confirm_window': int(FPT_CONFIRM_WINDOW),
-        'fpt_confirm_required': int(FPT_CONFIRM_REQUIRED),
     }
 
 
@@ -410,7 +391,7 @@ def run_one_bearing_smoke_test(
             hi_info['fpt_index'],
             color='purple',
             ls=':',
-            label=f"FPT={hi_info['fpt_index']} (5 + 20/30)",
+            label=f"FPT={hi_info['fpt_index']} (5 consecutive)",
         )
     axes[0].set_title(f'RMS smoke test — {bearing}')
     axes[0].set_xlabel('File index')
@@ -449,8 +430,6 @@ def run_one_bearing_smoke_test(
         'fpt_index': hi_info['fpt_index'],
         'fpt_found': bool(hi_info['fpt_found']),
         'fpt_consecutive': int(hi_info['fpt_consecutive']),
-        'fpt_confirm_window': int(hi_info['fpt_confirm_window']),
-        'fpt_confirm_required': int(hi_info['fpt_confirm_required']),
         'plot': str(smoke_plot),
     }
     print('\\nSMOKE TEST PASSED')
@@ -551,8 +530,6 @@ def build_one_bearing_dataset(bearing: str, split: str, cwt_scaler: dict, out_di
         'fpt_index': hi_info['fpt_index'],
         'fpt_found': bool(hi_info['fpt_found']),
         'fpt_consecutive': int(hi_info['fpt_consecutive']),
-        'fpt_confirm_window': int(hi_info['fpt_confirm_window']),
-        'fpt_confirm_required': int(hi_info['fpt_confirm_required']),
         'healthy_files_used': int(hi_info['healthy_files_used']),
         'baseline_mu': float(hi_info['baseline_mu']),
         'baseline_sigma': float(hi_info['baseline_sigma']),
@@ -589,8 +566,6 @@ if RUN_FULL_PIPELINE:
             'ewma_alpha': EWMA_ALPHA,
             'hi_sigma_span': HI_SIGMA_SPAN,
             'fpt_consecutive': FPT_CONSECUTIVE,
-            'fpt_confirm_window': FPT_CONFIRM_WINDOW,
-            'fpt_confirm_required': FPT_CONFIRM_REQUIRED,
             'leakage_note': 'HI does not use future per-bearing min/max normalization.',
         },
         'artifacts': all_meta,
@@ -658,7 +633,7 @@ def plot_bearing_sanity(bearing: str, out_dir: Path = OUT_DIR):
     axes[0].plot(idx, y_rms_ewma, lw=1.5, label='RMS EWMA')
     axes[0].axhline(threshold, color='red', ls='--', lw=1.2, label='3-sigma threshold')
     if meta['fpt_found']:
-        axes[0].axvline(fpt, color='purple', ls=':', lw=1.2, label=f'FPT={fpt} (5 + 20/30)')
+        axes[0].axvline(fpt, color='purple', ls=':', lw=1.2, label=f'FPT={fpt} (5 consecutive)')
     axes[0].set_title(f'RMS + FPT — {bearing}')
     axes[0].set_xlabel('File index')
     axes[0].legend()
@@ -740,6 +715,6 @@ notebook = {
     "nbformat_minor": 5,
 }
 
-output = Path(__file__).resolve().parents[2] / "notebooks" / "cwt_hi_cnn_prepare_kaggle_vhi2.ipynb"
+output = Path(__file__).resolve().parents[2] / "notebooks" / "exploratory" / "e1_cwt_3sigma_hi_dataset.ipynb"
 output.write_text(json.dumps(notebook, ensure_ascii=False, indent=1), encoding="utf-8")
 print(output.name)

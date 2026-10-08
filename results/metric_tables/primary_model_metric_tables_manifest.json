@@ -1,6 +1,6 @@
 {
   "purpose": "primary_model_metric_tables_for_paper",
-  "source_dir": "results/04_training_cnn_vs_cnn_lstm",
+  "source_dir": "results/07_train_cnn_vs_cnn_lstm",
   "output_dir": "results/metric_tables",
   "analysis": "primary_fixed_threshold_p_0_5",
   "threshold": 0.5,

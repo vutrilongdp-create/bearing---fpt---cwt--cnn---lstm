@@ -62,7 +62,7 @@ RMS is normalised by the first 100 healthy files, smoothed with a causal 30-file
 before any model is trained. A 30-file recovery rule rejects transient spikes.
 
 <p align="center">
-  <img src="figures/task1_fpt_overview_IRRMS_vector.svg" width="85%" alt="IRRMS health indicator and frozen FPT for the six learning bearings">
+  <img src="figures/fpt_reference_irrms_overview.svg" width="85%" alt="IRRMS health indicator and frozen FPT for the six learning bearings">
 </p>
 
 | Bearing | 1_1 | 1_2 | 2_1 | 2_2 | 3_1 | 3_2 |
@@ -129,30 +129,37 @@ is evidence for this setup, not a general claim.
 
 ```text
 .
-├── notebooks/                 # Kaggle pipeline (run in order 01 → 06)
-│   ├── 01_rrms_fpt_reference_kaggle.ipynb          # causal IRRMS FPT reference
-│   ├── 01b_irrms_paper_audit_kaggle.ipynb          # threshold sensitivity audit
-│   ├── 02_prepare_cwt_cache_kaggle.ipynb           # raw signal -> CWT cache
-│   ├── 02b_cwt_paper_figures_kaggle.ipynb          # CWT figures
-│   ├── 03_prepare_fold_scalers_kaggle.ipynb        # leave-one-bearing-out folds + scalers
-│   ├── 04_validate_fpt_model_contract_kaggle.ipynb # model / data contract checks
-│   ├── 05_train_cnn_vs_cnn_lstm_kaggle.ipynb       # training + FPT evaluation
-│   ├── 06_calibrated_threshold_fpt_analysis_kaggle.ipynb  # inner-val threshold calibration
-│   └── *_vhi2 / cwt_hi_*      # earlier exploratory iterations (health-index variants)
+├── notebooks/                                # Kaggle pipeline, run in order 01 → 08
+│   ├── 01_fpt_reference_irrms.ipynb          # causal IRRMS health indicator → frozen FPT labels
+│   ├── 02_fpt_reference_figures.ipynb        # IRRMS method audit + paper figures
+│   ├── 03_cwt_image_cache.ipynb              # raw vibration → 2×128×128 CWT log-power cache
+│   ├── 04_cwt_figures.ipynb                  # CWT images before / at / after FPT
+│   ├── 05_cv_folds_and_scalers.ipynb         # leave-one-bearing-out folds + train-only scalers
+│   ├── 06_model_contract_check.ipynb         # causal datasets + shared encoder smoke tests
+│   ├── 07_train_cnn_vs_cnn_lstm.ipynb        # training + FPT evaluation (primary, P = 0.5)
+│   ├── 08_threshold_calibration.ipynb        # inner-validation threshold calibration (secondary)
+│   └── exploratory/                          # earlier health-index (HI) iterations, not used in the paper
+│       ├── e1_cwt_3sigma_hi_dataset.ipynb
+│       ├── e2_cwt_3sigma_hi_dataset_v2.ipynb
+│       └── e3_ewma_hi_fpt_audit_v2.ipynb
 ├── scripts/
-│   ├── notebook_generators/   # create_*_notebook.py: generate each notebook above
-│   └── create_*.py            # build paper tables & figures from saved artifacts
-├── tests/                     # 104 pytest contract tests for the notebooks
-├── results/
-│   ├── 01_fpt_reference/      # frozen FPT reference + IRRMS threshold sensitivity
-│   ├── 02_cwt_figures/        # CWT images before / at / after FPT
-│   ├── 03_fold_scalers/       # fold manifest, per-fold scalers, audit
-│   ├── 04_training_cnn_vs_cnn_lstm/  # checkpoints (.pt), histories, predictions, metrics
-│   ├── 05_threshold_calibration/     # inner-validation calibrated run
-│   ├── metric_tables/         # primary model metric tables
-│   └── paper_ready_results/   # paper tables and figures
-├── figures/                   # figures used in this README
-└── docs/architecture/         # editable draw.io model diagrams
+│   ├── notebook_generators/                  # build_<notebook>.py: generates the notebook of the same name
+│   ├── build_metric_tables.py                # results/07 → results/metric_tables
+│   ├── build_paper_results.py                # results/07 + 08 → results/paper_ready_results
+│   ├── export_figures_300dpi.py              # 300-dpi copies of all result figures
+│   └── export_irrms_overview_svg.py          # vector FPT overview figure for the README
+├── tests/                                    # test_<notebook>.py: 104 pytest contract tests
+├── results/                                  # folder number = notebook that produced it
+│   ├── 01_fpt_reference/                     # frozen FPT labels + IRRMS threshold sensitivity
+│   ├── 03_cwt_image_cache/                   # CWT example images
+│   ├── 04_cwt_figures/                       # CWT paper figures
+│   ├── 05_cv_folds_and_scalers/              # fold manifest, per-fold scalers, audit
+│   ├── 07_train_cnn_vs_cnn_lstm/             # checkpoints (.pt), histories, predictions, metrics
+│   ├── 08_threshold_calibration/             # inner-validation calibrated run
+│   ├── metric_tables/                        # primary model metric tables
+│   └── paper_ready_results/                  # paper tables and figures
+├── figures/                                  # figures used in this README
+└── docs/architecture/                        # editable draw.io model diagrams
 ```
 
 ## Getting started
@@ -173,16 +180,16 @@ pytest tests -q
 **Rebuild the result tables** from the saved artifacts in `results/`:
 
 ```bash
-python scripts/create_primary_model_metric_tables.py
-python scripts/create_paper_ready_results.py
+python scripts/build_metric_tables.py
+python scripts/build_paper_results.py
 ```
 
 **Re-run the full pipeline.** Download the PRONOSTIA learning set
 ([FEMTO-ST / IEEE PHM 2012 challenge](https://github.com/wkzs111/phm-ieee-2012-data-challenge-dataset)),
-upload it as a Kaggle dataset, then run notebooks `01 → 06` on Kaggle (GPU recommended),
+upload it as a Kaggle dataset, then run notebooks `01 → 08` on Kaggle (GPU recommended),
 attaching each notebook's output as the next one's input. Paths are set at the top of each
 notebook (`/kaggle/input/...`). To change a notebook, edit its generator in
-`scripts/notebook_generators/` and run it (e.g. `python scripts/notebook_generators/create_train_cnn_vs_cnn_lstm_notebook.py`)
+`scripts/notebook_generators/` and run it (e.g. `python scripts/notebook_generators/build_07_train_cnn_vs_cnn_lstm.py`)
 so the notebook and the contract tests stay in sync.
 
 ## Acknowledgements

@@ -2,7 +2,7 @@ import ast
 import json
 from pathlib import Path
 
-NOTEBOOK = Path(__file__).parents[1] / "notebooks" / "01b_irrms_paper_audit_kaggle.ipynb"
+NOTEBOOK = Path(__file__).parents[1] / "notebooks" / "02_fpt_reference_figures.ipynb"
 
 
 def notebook_code() -> str:
