@@ -623,6 +623,6 @@ notebook = {
     "nbformat_minor": 5,
 }
 
-output = Path(__file__).resolve().parents[2] / "notebooks" / "02_prepare_cwt_cache_kaggle.ipynb"
+output = Path(__file__).resolve().parents[2] / "notebooks" / "03_cwt_image_cache.ipynb"
 output.write_text(json.dumps(notebook, ensure_ascii=False, indent=1), encoding="utf-8")
 print(output.name)

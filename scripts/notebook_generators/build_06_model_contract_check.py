@@ -443,6 +443,6 @@ notebook = {
     "nbformat_minor": 5,
 }
 
-output = Path(__file__).resolve().parents[2] / "notebooks" / "04_validate_fpt_model_contract_kaggle.ipynb"
+output = Path(__file__).resolve().parents[2] / "notebooks" / "06_model_contract_check.ipynb"
 output.write_text(json.dumps(notebook, ensure_ascii=False, indent=1), encoding="utf-8")
 print(output.name)

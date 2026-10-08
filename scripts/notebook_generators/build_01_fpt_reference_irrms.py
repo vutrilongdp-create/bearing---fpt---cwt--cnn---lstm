@@ -829,6 +829,6 @@ notebook = {
     "nbformat_minor": 5,
 }
 
-output = Path(__file__).resolve().parents[2] / "notebooks" / "01_rrms_fpt_reference_kaggle.ipynb"
+output = Path(__file__).resolve().parents[2] / "notebooks" / "01_fpt_reference_irrms.ipynb"
 output.write_text(json.dumps(notebook, ensure_ascii=False, indent=1), encoding="utf-8")
 print(output.name)

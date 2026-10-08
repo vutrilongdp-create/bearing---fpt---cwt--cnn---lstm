@@ -1,7 +1,7 @@
 {
   "purpose": "paper_ready_result_presentation_only",
-  "primary_source": "results/04_training_cnn_vs_cnn_lstm",
-  "secondary_source": "results/05_threshold_calibration",
+  "primary_source": "results/07_train_cnn_vs_cnn_lstm",
+  "secondary_source": "results/08_threshold_calibration",
   "output_dir": "results/paper_ready_results",
   "primary_rule": "fixed probability threshold P=0.5",
   "secondary_rule": "threshold selected from inner-validation only",

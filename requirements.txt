@@ -6,5 +6,5 @@ PyWavelets>=1.5
 matplotlib>=3.8
 torch>=2.1
 pytest>=8.0
-# optional: only for scripts/create_irrms_overview_vector.py
+# optional: only for scripts/export_irrms_overview_svg.py
 # PyMuPDF>=1.23

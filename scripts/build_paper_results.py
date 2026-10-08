@@ -16,8 +16,8 @@ import numpy as np
 
 
 ROOT = Path(__file__).resolve().parents[1]
-PRIMARY_DIR = ROOT / "results" / "04_training_cnn_vs_cnn_lstm"
-SECONDARY_DIR = ROOT / "results" / "05_threshold_calibration"
+PRIMARY_DIR = ROOT / "results" / "07_train_cnn_vs_cnn_lstm"
+SECONDARY_DIR = ROOT / "results" / "08_threshold_calibration"
 OUT_DIR = ROOT / "results" / "paper_ready_results"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 

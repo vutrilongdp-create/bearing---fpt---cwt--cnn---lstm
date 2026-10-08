@@ -599,6 +599,6 @@ if __name__ == "__main__":
         "nbformat": 4,
         "nbformat_minor": 5,
     }
-    out = Path(__file__).resolve().parents[2] / "notebooks" / "02b_cwt_paper_figures_kaggle.ipynb"
+    out = Path(__file__).resolve().parents[2] / "notebooks" / "04_cwt_figures.ipynb"
     out.write_text(json.dumps(nb, indent=1, ensure_ascii=False), encoding="utf-8")
     print(f"Wrote {out.name} ({len(cells)} cells)")

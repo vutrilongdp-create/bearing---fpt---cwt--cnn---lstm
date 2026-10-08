@@ -17,7 +17,7 @@ import numpy as np
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE_DIR = ROOT / "results" / "04_training_cnn_vs_cnn_lstm"
+SOURCE_DIR = ROOT / "results" / "07_train_cnn_vs_cnn_lstm"
 OUT_DIR = ROOT / "results" / "metric_tables"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 

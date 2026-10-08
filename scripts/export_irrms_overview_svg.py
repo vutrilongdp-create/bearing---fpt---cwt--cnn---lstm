@@ -14,7 +14,7 @@ SOURCE_PDF = (
 OUTPUT_SVG = (
     ROOT
     / "figures"
-    / "task1_fpt_overview_IRRMS_vector.svg"
+    / "fpt_reference_irrms_overview.svg"
 )
 
 OLD_LABEL = '<tspan y="0" x="0 8.272">HI</tspan>'
