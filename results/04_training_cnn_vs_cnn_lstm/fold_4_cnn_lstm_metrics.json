@@ -1,0 +1,72 @@
+{
+  "best_epoch": 1,
+  "best_val_auc_pr": 1.0,
+  "checkpoint_provenance": {
+    "best_epoch": 1,
+    "best_val_auc_pr": 1.0000000000000002,
+    "cache_sha256": {
+      "bearing1_1": "c521e443342ce3dabe8f17f8e90f05c9e6a62458eca6ca48e6cd33603d062246",
+      "bearing1_2": "e4998f15bc78e68ecfb397dcb0e1c9ae86cfc07b01407031a41f8a464b034c5a",
+      "bearing2_1": "181a5d6ac61984f735c883fd77efbffc1d349b3258e6b2d86cdfae82823ca57c",
+      "bearing2_2": "6ee50c5f019bd5db208623a1d142f16ba026fbd8b2a37e1cbab5640f4a7ee7a1",
+      "bearing3_1": "e68f3f0dd91f0410b00a339c78442a01ca90bb3ab61e8f2a19d83c14370661fb",
+      "bearing3_2": "bbd1ddbecc4fefd3d22d35c27ef717c9d5081cf671ae3f39000ece22d5f2f454"
+    },
+    "cache_version": "cwt-unscaled-log-power-v2",
+    "fit_bearings": [
+      "bearing1_1",
+      "bearing1_2",
+      "bearing2_1",
+      "bearing2_2"
+    ],
+    "fold_index": 4,
+    "fold_manifest_sha256": "a3c9697196619b4b820400f660aacaf3d050baa7193b2e0e17a415dc230e6c38",
+    "fpt_consecutive": 5,
+    "inner_val_bearing": "bearing3_2",
+    "label_version": "causal-irrms-fpt-reference-v3-q99",
+    "model_contract_sha256": "ffda0a69b25b1d99c9e5b911be2ca86cff489e53a215baa4343530c70f6b51bd",
+    "model_name": "cnn_lstm",
+    "model_seed": 274,
+    "official_data_policy": "closed; learning bearings only",
+    "outer_test_bearing": "bearing3_1",
+    "probability_threshold": 0.5,
+    "scaler_sha256": "51c0d03dcaf6f6ed146139e181d6a0c9c6e8dff49e3124e6eb3135fd314b11a3",
+    "sequence_length": 16,
+    "task": "fpt_detection",
+    "test_target_count": 500,
+    "train_target_count": 5322,
+    "training_seed": 274004,
+    "val_target_count": 1622,
+    "version": "fpt-training-checkpoint-v2"
+  },
+  "checkpoint_sha256": "c80655889f6d6deae51c8a45ef7f50bc0c3d9638f2d97af87f0d8642f56098ce",
+  "event_metrics": {
+    "abs_fpt_error_files": 3,
+    "missed_detection": false,
+    "pre_fpt_alarm_run": false,
+    "pre_fpt_positive_sample_count": 0,
+    "predicted_fpt": 496,
+    "reference_fpt": 493,
+    "signed_delay_files": 3,
+    "signed_delay_seconds": 30
+  },
+  "fold_index": 4,
+  "model": "cnn_lstm",
+  "outer_test_bearing": "bearing3_1",
+  "pos_weight_audit": 1.2783,
+  "sample_metrics": {
+    "auc_pr": 0.9915824915824916,
+    "balanced_accuracy": 0.9318181818181819,
+    "f1": 0.926829268292683,
+    "n_negative": 478,
+    "n_positive": 22,
+    "n_samples": 500,
+    "precision": 1.0,
+    "recall": 0.8636363636363636,
+    "roc_auc": 0.9995245340433625
+  },
+  "scaler_sha256": "51c0d03dcaf6f6ed146139e181d6a0c9c6e8dff49e3124e6eb3135fd314b11a3",
+  "total_epochs": 10,
+  "training_seed": 274004,
+  "training_time_seconds": 821.7
+}

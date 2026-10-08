@@ -1,0 +1,7 @@
+bearing,reference_fpt,cnn_predicted_fpt,cnn_abs_error,cnn_signed_delay,cnn_lstm_predicted_fpt,cnn_lstm_abs_error,cnn_lstm_signed_delay,best_model_by_abs_error
+bearing1_1,1871,15,1856,-1856,15,1856,-1856,Tie
+bearing1_2,826,64,762,-762,26,800,-800,CWT-CNN
+bearing2_1,151,280,129,129,876,725,725,CWT-CNN
+bearing2_2,198,235,37,37,211,13,13,CWT-CNN-LSTM
+bearing3_1,493,493,0,0,496,3,3,CWT-CNN
+bearing3_2,1597,1597,0,0,1607,10,10,CWT-CNN

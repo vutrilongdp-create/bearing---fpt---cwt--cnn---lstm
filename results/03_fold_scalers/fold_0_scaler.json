@@ -1,0 +1,41 @@
+{
+  "scaler_version": "per-channel-zscore-v1",
+  "scaler_kind": "per_channel_zscore",
+  "ddof": 0,
+  "epsilon": 1e-08,
+  "fold_index": 0,
+  "fit_bearings": [
+    "bearing2_1",
+    "bearing2_2",
+    "bearing3_1",
+    "bearing3_2"
+  ],
+  "inner_val_bearing": "bearing1_2",
+  "outer_test_bearing": "bearing1_1",
+  "channel_axis": 1,
+  "channel_names": [
+    "horizontal",
+    "vertical"
+  ],
+  "pixel_count_per_channel": [
+    63242240,
+    63242240
+  ],
+  "mean": [
+    -5.028192319172583,
+    -5.907658947479622
+  ],
+  "std": [
+    2.1347737477366615,
+    1.8633516541635358
+  ],
+  "task2_manifest_sha256": "ef61a0a261d1cc19b9a5ae75b3a121b61fa1532969ecb457bf16f7c8a35f1f5f",
+  "fit_cache_sha256": {
+    "bearing2_1": "181a5d6ac61984f735c883fd77efbffc1d349b3258e6b2d86cdfae82823ca57c",
+    "bearing2_2": "6ee50c5f019bd5db208623a1d142f16ba026fbd8b2a37e1cbab5640f4a7ee7a1",
+    "bearing3_1": "e68f3f0dd91f0410b00a339c78442a01ca90bb3ab61e8f2a19d83c14370661fb",
+    "bearing3_2": "bbd1ddbecc4fefd3d22d35c27ef717c9d5081cf671ae3f39000ece22d5f2f454"
+  },
+  "frozen_irrms_threshold": 1.2637933790683746,
+  "label_version": "causal-irrms-fpt-reference-v3-q99"
+}

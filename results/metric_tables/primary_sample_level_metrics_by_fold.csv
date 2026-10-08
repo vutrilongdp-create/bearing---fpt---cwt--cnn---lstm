@@ -1,0 +1,13 @@
+analysis,fold,outer_test_bearing,model_label,threshold,n_samples,n_negative,n_positive,tn,fp,fn,tp,accuracy,balanced_accuracy,precision,recall,specificity,f1,auc_pr,roc_auc,prediction_source,metric_source,confusion_source
+primary_fixed_threshold_p_0_5,0,bearing1_1,CWT-CNN,0.5,2788,1856,932,428,1428,0,932,0.487805,0.615302,0.394915,1.0,0.230603,0.566221,0.844694,0.915366,prediction_npz,metrics_json,confusion_json
+primary_fixed_threshold_p_0_5,0,bearing1_1,CWT-CNN-LSTM,0.5,2788,1856,932,88,1768,0,932,0.365854,0.523707,0.345185,1.0,0.047414,0.513216,0.358546,0.624226,prediction_npz,computed_from_prediction,confusion_json
+primary_fixed_threshold_p_0_5,1,bearing1_2,CWT-CNN,0.5,856,811,45,582,229,0,45,0.732477,0.858816,0.164234,1.0,0.717633,0.282132,1.0,1.0,missing_prediction,metrics_json,confusion_json
+primary_fixed_threshold_p_0_5,1,bearing1_2,CWT-CNN-LSTM,0.5,856,811,45,432,379,0,45,0.557243,0.766338,0.106132,1.0,0.532676,0.191898,0.975424,0.99441,prediction_npz,computed_from_prediction,confusion_json
+primary_fixed_threshold_p_0_5,2,bearing2_1,CWT-CNN,0.5,896,136,760,136,0,697,63,0.222098,0.541447,1.0,0.082895,1.0,0.153098,0.999953,0.999739,prediction_npz,computed_from_prediction,confusion_json
+primary_fixed_threshold_p_0_5,2,bearing2_1,CWT-CNN-LSTM,0.5,896,136,760,136,0,725,35,0.190848,0.523026,1.0,0.046053,1.0,0.08805,1.0,1.0,prediction_npz,computed_from_prediction,confusion_json
+primary_fixed_threshold_p_0_5,3,bearing2_2,CWT-CNN,0.5,782,183,599,183,0,34,565,0.956522,0.971619,1.0,0.943239,1.0,0.97079,0.999997,0.999991,prediction_npz,metrics_json,confusion_json
+primary_fixed_threshold_p_0_5,3,bearing2_2,CWT-CNN-LSTM,0.5,782,183,599,183,0,13,586,0.983376,0.989149,1.0,0.978297,1.0,0.98903,1.0,1.0,prediction_npz,metrics_json,confusion_json
+primary_fixed_threshold_p_0_5,4,bearing3_1,CWT-CNN,0.5,500,478,22,478,0,0,22,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,prediction_npz,metrics_json,confusion_json
+primary_fixed_threshold_p_0_5,4,bearing3_1,CWT-CNN-LSTM,0.5,500,478,22,478,0,3,19,0.994,0.931818,1.0,0.863636,1.0,0.926829,0.991582,0.999525,prediction_npz,metrics_json,confusion_json
+primary_fixed_threshold_p_0_5,5,bearing3_2,CWT-CNN,0.5,1622,1582,40,1582,0,0,40,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,prediction_npz,metrics_json,confusion_json
+primary_fixed_threshold_p_0_5,5,bearing3_2,CWT-CNN-LSTM,0.5,1622,1582,40,1582,0,10,30,0.993835,0.875,1.0,0.75,1.0,0.857143,1.0,1.0,prediction_npz,metrics_json,confusion_json

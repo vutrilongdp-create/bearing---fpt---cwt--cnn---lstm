@@ -1,0 +1,13 @@
+analysis,fold,outer_test_bearing,model_label,threshold,reference_fpt,predicted_fpt,signed_delay_files,abs_fpt_error_files,relative_error_reference_pct,pre_fpt_positive_count,pre_fpt_alarm_run,missed_detection,event_source
+primary_fixed_threshold_p_0_5,0,bearing1_1,CWT-CNN,0.5,1871,15,-1856,1856,99.198,1428,True,False,prediction_npz
+primary_fixed_threshold_p_0_5,0,bearing1_1,CWT-CNN-LSTM,0.5,1871,15,-1856,1856,99.198,1768,True,False,prediction_npz
+primary_fixed_threshold_p_0_5,1,bearing1_2,CWT-CNN,0.5,826,64,-762,762,92.252,229,True,False,metrics_json
+primary_fixed_threshold_p_0_5,1,bearing1_2,CWT-CNN-LSTM,0.5,826,26,-800,800,96.852,379,True,False,prediction_npz
+primary_fixed_threshold_p_0_5,2,bearing2_1,CWT-CNN,0.5,151,280,129,129,85.43,0,False,False,prediction_npz
+primary_fixed_threshold_p_0_5,2,bearing2_1,CWT-CNN-LSTM,0.5,151,876,725,725,480.132,0,False,False,prediction_npz
+primary_fixed_threshold_p_0_5,3,bearing2_2,CWT-CNN,0.5,198,235,37,37,18.687,0,False,False,prediction_npz
+primary_fixed_threshold_p_0_5,3,bearing2_2,CWT-CNN-LSTM,0.5,198,211,13,13,6.566,0,False,False,prediction_npz
+primary_fixed_threshold_p_0_5,4,bearing3_1,CWT-CNN,0.5,493,493,0,0,0.0,0,False,False,prediction_npz
+primary_fixed_threshold_p_0_5,4,bearing3_1,CWT-CNN-LSTM,0.5,493,496,3,3,0.609,0,False,False,prediction_npz
+primary_fixed_threshold_p_0_5,5,bearing3_2,CWT-CNN,0.5,1597,1597,0,0,0.0,0,False,False,prediction_npz
+primary_fixed_threshold_p_0_5,5,bearing3_2,CWT-CNN-LSTM,0.5,1597,1607,10,10,0.626,0,False,False,prediction_npz

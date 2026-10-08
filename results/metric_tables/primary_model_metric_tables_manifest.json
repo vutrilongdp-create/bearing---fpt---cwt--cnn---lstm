@@ -1,0 +1,25 @@
+{
+  "purpose": "primary_model_metric_tables_for_paper",
+  "source_dir": "results/04_training_cnn_vs_cnn_lstm",
+  "output_dir": "results/metric_tables",
+  "analysis": "primary_fixed_threshold_p_0_5",
+  "threshold": 0.5,
+  "no_retraining": true,
+  "no_prediction_editing": true,
+  "sample_rows": 12,
+  "event_rows": 12,
+  "summary_rows": 2,
+  "warnings": [
+    "fold_1_cnn: missing predictions.npz; used saved metric/confusion JSON only"
+  ],
+  "generated_files": [
+    "primary_event_level_metrics_by_fold.csv",
+    "primary_event_level_metrics_by_fold.html",
+    "primary_model_metric_summary.csv",
+    "primary_model_metric_summary.html",
+    "primary_model_metric_tables_manifest.json",
+    "primary_model_metric_tables_summary.md",
+    "primary_sample_level_metrics_by_fold.csv",
+    "primary_sample_level_metrics_by_fold.html"
+  ]
+}

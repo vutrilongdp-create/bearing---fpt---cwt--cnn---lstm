@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# Raw / cached data (PRONOSTIA is not redistributed)
+data/
+*.pkz
+*.pkl
+*.zip
+results/**/*_cwt_unscaled.npz
+
+# Generated upscaled copies (rebuild with scripts/create_300dpi_paper_images.py)
+results/paper_300dpi_images/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+~$*
+*.tmp

@@ -1,0 +1,7 @@
+threshold_name,threshold_value,n_bearings,all_fpt_found,any_not_found,any_search_start_hit,any_baseline_crossing,any_near_end,total_baseline_alarm_runs,total_rejected_recovery,mean_degraded_ratio,min_degraded_count,auto_screen_pass,manual_review_required
+q99,1.2637933790683746,6,True,False,False,False,True,0,4,0.3395225823486952,22,True,True
+q99_5,1.2738747596740723,6,True,False,False,False,True,0,4,0.3390710555822363,22,True,True
+fixed,1.05,6,True,False,False,True,True,6,5,0.3656495687227119,22,False,True
+fixed,1.1,6,True,False,False,True,True,5,5,0.36141565930473146,22,False,True
+fixed,1.15,6,True,False,False,True,True,3,5,0.35585616540173753,22,False,True
+fixed,1.2,6,True,False,False,True,True,1,7,0.34871784863910943,22,False,True

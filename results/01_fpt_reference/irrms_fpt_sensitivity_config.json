@@ -1,0 +1,62 @@
+{
+  "version": "causal-irrms-fpt-sensitivity-v2",
+  "bearings": [
+    "bearing1_1",
+    "bearing1_2",
+    "bearing2_1",
+    "bearing2_2",
+    "bearing3_1",
+    "bearing3_2"
+  ],
+  "data_points_per_file": 2560,
+  "sampling_frequency_hz": 25600.0,
+  "sample_interval_seconds": 10.0,
+  "index_convention": "zero-based file index",
+  "healthy_files": 100,
+  "irrms_window": 30,
+  "fpt_consecutive": 5,
+  "recovery_run": 30,
+  "search_start": 100,
+  "std_ddof": 0,
+  "threshold_operator": ">",
+  "near_end_min_degraded_files": 30,
+  "fixed_thresholds": [
+    1.05,
+    1.1,
+    1.15,
+    1.2
+  ],
+  "baseline_quantiles": {
+    "q99": 1.2637933790683746,
+    "q99_5": 1.2738747596740723
+  },
+  "threshold_candidates": [
+    {
+      "threshold": 1.05,
+      "source": "fixed"
+    },
+    {
+      "threshold": 1.1,
+      "source": "fixed"
+    },
+    {
+      "threshold": 1.15,
+      "source": "fixed"
+    },
+    {
+      "threshold": 1.2,
+      "source": "fixed"
+    },
+    {
+      "threshold": 1.2637933790683746,
+      "source": "q99"
+    },
+    {
+      "threshold": 1.2738747596740723,
+      "source": "q99_5"
+    }
+  ],
+  "threshold_frozen": false,
+  "ready_for_cwt": false,
+  "label_type": "causal IRRMS-based retrospective operational FPT reference"
+}

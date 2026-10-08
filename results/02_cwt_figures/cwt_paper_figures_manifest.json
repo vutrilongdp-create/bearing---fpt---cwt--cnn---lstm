@@ -1,0 +1,332 @@
+{
+  "visualization_version": "cwt-paper-figures-v1",
+  "purpose": "paper_only_cwt_figures_not_for_training_or_evaluation",
+  "cwt_wavelet": "morl",
+  "n_scales": 128,
+  "scale_min": 1.0,
+  "scale_max": 512.0,
+  "scale_spacing": "geometric",
+  "image_shape": [
+    128,
+    128
+  ],
+  "log_power_transform": "log2(abs(coef)^2 + 1e-3)",
+  "sampling_frequency_hz": 25600.0,
+  "data_points_per_file": 2560,
+  "label_version": "causal-irrms-fpt-reference-v3-q99",
+  "sequence_length": 16,
+  "raw_dir": "/kaggle/input/datasets/longvu274/train-dataset",
+  "label_dir": "/kaggle/input/datasets/longvu274/causal-irrms-fpt-reference",
+  "out_dir": "/kaggle/working/cwt_paper_figures",
+  "entries": [
+    {
+      "kind": "three_timepoint_panel",
+      "tag": "bearing1_1_three_timepoint_cwt",
+      "bearing": "bearing1_1",
+      "timepoints": [
+        {
+          "name": "Start",
+          "index": 0
+        },
+        {
+          "name": "FPT",
+          "index": 1871
+        },
+        {
+          "name": "End",
+          "index": 2802
+        }
+      ],
+      "fpt_index": 1871,
+      "png_path": "/kaggle/working/cwt_paper_figures/bearing1_1_three_timepoint_cwt.png",
+      "pdf_path": "/kaggle/working/cwt_paper_figures/bearing1_1_three_timepoint_cwt.pdf",
+      "png_sha256": "6d9706a2a6d09063bc2ed26e684779cdd17d7940545550cb0a18a40048b83ea4",
+      "pdf_sha256": "0054a29ca50ae76a325d9886fdcef913e14addf9ec1ea9015263a7d087adefe8",
+      "vmin": -8.49989179611206,
+      "vmax": 6.518876485824587
+    },
+    {
+      "kind": "three_timepoint_panel",
+      "tag": "bearing1_2_three_timepoint_cwt",
+      "bearing": "bearing1_2",
+      "timepoints": [
+        {
+          "name": "Start",
+          "index": 0
+        },
+        {
+          "name": "FPT",
+          "index": 826
+        },
+        {
+          "name": "End",
+          "index": 870
+        }
+      ],
+      "fpt_index": 826,
+      "png_path": "/kaggle/working/cwt_paper_figures/bearing1_2_three_timepoint_cwt.png",
+      "pdf_path": "/kaggle/working/cwt_paper_figures/bearing1_2_three_timepoint_cwt.pdf",
+      "png_sha256": "4e161bc4c714ff536e3dbb508666a68d5e990c1684d20b94307f87c3622f44e1",
+      "pdf_sha256": "037bcda1d18a4653c042cfbefe6db82a8a0f995a289c2fd21f4636d0e8d08cab",
+      "vmin": -8.772187719345093,
+      "vmax": 3.9778006887435926
+    },
+    {
+      "kind": "three_timepoint_panel",
+      "tag": "bearing2_1_three_timepoint_cwt",
+      "bearing": "bearing2_1",
+      "timepoints": [
+        {
+          "name": "Start",
+          "index": 0
+        },
+        {
+          "name": "FPT",
+          "index": 151
+        },
+        {
+          "name": "End",
+          "index": 910
+        }
+      ],
+      "fpt_index": 151,
+      "png_path": "/kaggle/working/cwt_paper_figures/bearing2_1_three_timepoint_cwt.png",
+      "pdf_path": "/kaggle/working/cwt_paper_figures/bearing2_1_three_timepoint_cwt.pdf",
+      "png_sha256": "84e4702ea09c6c82e8b0b59c2190b403a0414f761152a204a6a6eddab5301b80",
+      "pdf_sha256": "18fe4681cefe77f1737f030ac6f5ece2f600b63ed5fb0b92b46007db4214f454",
+      "vmin": -9.215254211425782,
+      "vmax": 3.3556690311431936
+    },
+    {
+      "kind": "three_timepoint_panel",
+      "tag": "bearing2_2_three_timepoint_cwt",
+      "bearing": "bearing2_2",
+      "timepoints": [
+        {
+          "name": "Start",
+          "index": 0
+        },
+        {
+          "name": "FPT",
+          "index": 198
+        },
+        {
+          "name": "End",
+          "index": 796
+        }
+      ],
+      "fpt_index": 198,
+      "png_path": "/kaggle/working/cwt_paper_figures/bearing2_2_three_timepoint_cwt.png",
+      "pdf_path": "/kaggle/working/cwt_paper_figures/bearing2_2_three_timepoint_cwt.pdf",
+      "png_sha256": "449d9af071c9fa9e3099cfbff2f84db3aa79ac82adfe02c9d264fc02702c6b4d",
+      "pdf_sha256": "24171f08679d07dad71cdea8de07d015ae1ebf07aaa889303db23520efa0d16d",
+      "vmin": -9.361521320343018,
+      "vmax": 4.287084808349611
+    },
+    {
+      "kind": "three_timepoint_panel",
+      "tag": "bearing3_1_three_timepoint_cwt",
+      "bearing": "bearing3_1",
+      "timepoints": [
+        {
+          "name": "Start",
+          "index": 0
+        },
+        {
+          "name": "FPT",
+          "index": 493
+        },
+        {
+          "name": "End",
+          "index": 514
+        }
+      ],
+      "fpt_index": 493,
+      "png_path": "/kaggle/working/cwt_paper_figures/bearing3_1_three_timepoint_cwt.png",
+      "pdf_path": "/kaggle/working/cwt_paper_figures/bearing3_1_three_timepoint_cwt.pdf",
+      "png_sha256": "77bdac576760cdf04624db006cc17bbd6fc6f8aceba82466278941e3e6bbbb9e",
+      "pdf_sha256": "4c902fb7ae61281ecb67950ec5936e95e09d26377dcca86ee4849c5d6c950465",
+      "vmin": -9.169746799468994,
+      "vmax": 5.261973896026626
+    },
+    {
+      "kind": "three_timepoint_panel",
+      "tag": "bearing3_2_three_timepoint_cwt",
+      "bearing": "bearing3_2",
+      "timepoints": [
+        {
+          "name": "Start",
+          "index": 0
+        },
+        {
+          "name": "FPT",
+          "index": 1597
+        },
+        {
+          "name": "End",
+          "index": 1636
+        }
+      ],
+      "fpt_index": 1597,
+      "png_path": "/kaggle/working/cwt_paper_figures/bearing3_2_three_timepoint_cwt.png",
+      "pdf_path": "/kaggle/working/cwt_paper_figures/bearing3_2_three_timepoint_cwt.pdf",
+      "png_sha256": "f850b0885f4d69343b35d2e440856c7185657692ada1465de9da5b9801e56a1b",
+      "pdf_sha256": "a89506c646fa804c8b485777b9881eee04572168597da6510e8eef3f82c7395f",
+      "vmin": -9.089311809539796,
+      "vmax": 3.066677527427676
+    },
+    {
+      "kind": "two_channel_panel",
+      "tag": "bearing3_1_before_fpt",
+      "bearing": "bearing3_1",
+      "index": 450,
+      "fpt_index": 493,
+      "png_path": "/kaggle/working/cwt_paper_figures/bearing3_1_before_fpt.png",
+      "pdf_path": "/kaggle/working/cwt_paper_figures/bearing3_1_before_fpt.pdf",
+      "png_sha256": "a154dcefc44c16132d5ad2195f50541cb9c8d47c87f5ccc1270c8274e6e62fb2",
+      "pdf_sha256": "6a362bff23b3b0ad58a3d287cf8a980dd430f5e8097864735e7f0ddd1d2ed50f",
+      "vmin": -9.295806865692139,
+      "vmax": -1.4510079991817681
+    },
+    {
+      "kind": "two_channel_panel",
+      "tag": "bearing3_1_at_fpt",
+      "bearing": "bearing3_1",
+      "index": 493,
+      "fpt_index": 493,
+      "png_path": "/kaggle/working/cwt_paper_figures/bearing3_1_at_fpt.png",
+      "pdf_path": "/kaggle/working/cwt_paper_figures/bearing3_1_at_fpt.pdf",
+      "png_sha256": "0576edcbf49eabb9be2a08a3860b1249ba4ba0c523cc9d747eeea70ef81dac91",
+      "pdf_sha256": "befbbe89c9cf095340f1b03c559b0c634f152be7ef2be08a1c8cbc27406989cf",
+      "vmin": -9.101366424560547,
+      "vmax": 7.113448038101179
+    },
+    {
+      "kind": "two_channel_panel",
+      "tag": "bearing3_1_after_fpt",
+      "bearing": "bearing3_1",
+      "index": 514,
+      "fpt_index": 493,
+      "png_path": "/kaggle/working/cwt_paper_figures/bearing3_1_after_fpt.png",
+      "pdf_path": "/kaggle/working/cwt_paper_figures/bearing3_1_after_fpt.pdf",
+      "png_sha256": "7e7f4dfc0ee5a26682f01e043218664887e588d5eed692b7df3cfd59862cf96d",
+      "pdf_sha256": "01643fa6b89e89a2709946f145b587962ddc19df1ca16652ff0898231840886e",
+      "vmin": -7.610578899383545,
+      "vmax": 1.2383545887470198
+    },
+    {
+      "kind": "two_channel_panel",
+      "tag": "bearing1_1_early_healthy",
+      "bearing": "bearing1_1",
+      "index": 100,
+      "fpt_index": 1871,
+      "png_path": "/kaggle/working/cwt_paper_figures/bearing1_1_early_healthy.png",
+      "pdf_path": "/kaggle/working/cwt_paper_figures/bearing1_1_early_healthy.pdf",
+      "png_sha256": "8026e208de4bf5cbdc0fbc1376a3d040edf67ef92523cc7f83862ce639f15b66",
+      "pdf_sha256": "005b558c1f2f7cfdd014c75371405f0a5ba02329b2699fe1ea122de21a4e65c7",
+      "vmin": -8.91474931716919,
+      "vmax": -0.45147925764322616
+    },
+    {
+      "kind": "two_channel_panel",
+      "tag": "bearing1_1_at_fpt",
+      "bearing": "bearing1_1",
+      "index": 1871,
+      "fpt_index": 1871,
+      "png_path": "/kaggle/working/cwt_paper_figures/bearing1_1_at_fpt.png",
+      "pdf_path": "/kaggle/working/cwt_paper_figures/bearing1_1_at_fpt.pdf",
+      "png_sha256": "bbd3524c66805b336aead0286fa191d44155734ce6febd72c4202fb5993908a5",
+      "pdf_sha256": "2748d1eee57403f632d08aeaa375edddc2136ce90ba35f8b07ba40e95fe97d0c",
+      "vmin": -8.118275880813599,
+      "vmax": 3.2876820540428073
+    },
+    {
+      "kind": "two_channel_panel",
+      "tag": "bearing1_2_early_healthy",
+      "bearing": "bearing1_2",
+      "index": 100,
+      "fpt_index": 826,
+      "png_path": "/kaggle/working/cwt_paper_figures/bearing1_2_early_healthy.png",
+      "pdf_path": "/kaggle/working/cwt_paper_figures/bearing1_2_early_healthy.pdf",
+      "png_sha256": "29223f129b66dd7017fb9f1394de96397c6f831eb84c456d741fde0835e2b9f6",
+      "pdf_sha256": "45e11adf91defda29acf9e70f59ccc55e2798a15367376d3410bb513946be21f",
+      "vmin": -8.895376987457276,
+      "vmax": -0.22287611305714566
+    },
+    {
+      "kind": "two_channel_panel",
+      "tag": "bearing1_2_at_fpt",
+      "bearing": "bearing1_2",
+      "index": 826,
+      "fpt_index": 826,
+      "png_path": "/kaggle/working/cwt_paper_figures/bearing1_2_at_fpt.png",
+      "pdf_path": "/kaggle/working/cwt_paper_figures/bearing1_2_at_fpt.pdf",
+      "png_sha256": "4eb92810e31beabcd6b72e478c487b1ef2d68260458ddfa5858601dd21ca7e88",
+      "pdf_sha256": "aaf7762fb64abafc2f3efd2b069e39b265df8e743ddb58ffd0e162d436f19b6b",
+      "vmin": -8.614904956817627,
+      "vmax": 1.22697781205177
+    },
+    {
+      "kind": "causal_sequence_strip",
+      "tag": "bearing3_1_causal_sequence_at_fpt",
+      "bearing": "bearing3_1",
+      "indices": [
+        478,
+        479,
+        480,
+        481,
+        482,
+        483,
+        484,
+        485,
+        486,
+        487,
+        488,
+        489,
+        490,
+        491,
+        492,
+        493
+      ],
+      "end_index": 493,
+      "fpt_index": 493,
+      "png_path": "/kaggle/working/cwt_paper_figures/bearing3_1_causal_sequence_at_fpt.png",
+      "pdf_path": "/kaggle/working/cwt_paper_figures/bearing3_1_causal_sequence_at_fpt.pdf",
+      "png_sha256": "508e009894a151f96d281041c480bcfcc35fcfb36a708d57bdd59f53cd5fc988",
+      "pdf_sha256": "728cb718664fcbf7df0e8ff81cc610803c0720c5b66b9355ff61850d619388b0",
+      "vmin": -9.233670101165771,
+      "vmax": 0.885259782075883
+    },
+    {
+      "kind": "causal_sequence_strip",
+      "tag": "bearing1_2_causal_sequence_at_fpt",
+      "bearing": "bearing1_2",
+      "indices": [
+        811,
+        812,
+        813,
+        814,
+        815,
+        816,
+        817,
+        818,
+        819,
+        820,
+        821,
+        822,
+        823,
+        824,
+        825,
+        826
+      ],
+      "end_index": 826,
+      "fpt_index": 826,
+      "png_path": "/kaggle/working/cwt_paper_figures/bearing1_2_causal_sequence_at_fpt.png",
+      "pdf_path": "/kaggle/working/cwt_paper_figures/bearing1_2_causal_sequence_at_fpt.pdf",
+      "png_sha256": "c40f6b93881410687c09448e1b74b8dc4563c4bc1d7f190e203e5cc39e71190f",
+      "pdf_sha256": "6040ffc1f5da5337575d44a1b55a441ba54bedbad3fedc623887556dd5239461",
+      "vmin": -8.921788997650147,
+      "vmax": 0.6635638016462333
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+analysis,fold,bearing,model_label,threshold,reference_fpt,predicted_fpt,signed_delay,abs_error,pre_fpt_positive_count,pre_fpt_alarm_run,missed,best_model_by_abs_error
+secondary_inner_val_calibrated,0,bearing1_1,CWT-CNN,0.95,1871,2460,589,589,27,False,False,cnn
+secondary_inner_val_calibrated,0,bearing1_1,CWT-CNN-LSTM,0.95,1871,15,-1856,1856,1368,True,False,cnn
+secondary_inner_val_calibrated,1,bearing1_2,CWT-CNN,0.15,826,15,-811,811,691,True,False,tie
+secondary_inner_val_calibrated,1,bearing1_2,CWT-CNN-LSTM,0.1,826,15,-811,811,811,True,False,tie
+secondary_inner_val_calibrated,2,bearing2_1,CWT-CNN,0.1,151,201,50,50,0,False,False,cnn_lstm
+secondary_inner_val_calibrated,2,bearing2_1,CWT-CNN-LSTM,0.1,151,181,30,30,0,False,False,cnn_lstm
+secondary_inner_val_calibrated,3,bearing2_2,CWT-CNN,0.95,198,265,67,67,0,False,False,cnn_lstm
+secondary_inner_val_calibrated,3,bearing2_2,CWT-CNN-LSTM,0.1,198,199,1,1,0,False,False,cnn_lstm
+secondary_inner_val_calibrated,4,bearing3_1,CWT-CNN,0.3,493,493,0,0,0,False,False,cnn
+secondary_inner_val_calibrated,4,bearing3_1,CWT-CNN-LSTM,0.1,493,495,2,2,0,False,False,cnn
+secondary_inner_val_calibrated,5,bearing3_2,CWT-CNN,0.95,1597,1609,12,12,0,False,False,cnn
+secondary_inner_val_calibrated,5,bearing3_2,CWT-CNN-LSTM,0.85,1597,1614,17,17,0,False,False,cnn

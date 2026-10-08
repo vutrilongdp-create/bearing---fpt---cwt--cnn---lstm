@@ -1,0 +1,26 @@
+{
+  "purpose": "paper_ready_result_presentation_only",
+  "primary_source": "results/04_training_cnn_vs_cnn_lstm",
+  "secondary_source": "results/05_threshold_calibration",
+  "output_dir": "results/paper_ready_results",
+  "primary_rule": "fixed probability threshold P=0.5",
+  "secondary_rule": "threshold selected from inner-validation only",
+  "no_retraining": true,
+  "no_original_result_modification": true,
+  "generated_files": [
+    "combined_summary_mean_median_std.csv",
+    "paper_ready_results_manifest.json",
+    "paper_ready_results_summary.md",
+    "primary_abs_error_by_bearing.svg",
+    "primary_event_detail.csv",
+    "primary_event_detail_highlight.html",
+    "primary_event_paired_by_bearing.csv",
+    "primary_secondary_abs_error_errorbar.svg",
+    "primary_summary_mean_median_std.csv",
+    "secondary_abs_error_by_bearing.svg",
+    "secondary_event_detail.csv",
+    "secondary_event_detail_highlight.html",
+    "secondary_event_paired_by_bearing.csv",
+    "secondary_summary_mean_median_std.csv"
+  ]
+}
