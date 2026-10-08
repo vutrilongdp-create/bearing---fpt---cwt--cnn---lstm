@@ -6,7 +6,7 @@
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.x-EE4C2C?logo=pytorch&logoColor=white)](https://pytorch.org/)
-[![Tests](https://github.com/OWNER/REPO/actions/workflows/tests.yml/badge.svg)](https://github.com/OWNER/REPO/actions/workflows/tests.yml)
+[![Tests](https://github.com/vutrilongdp-create/bearing---fpt---cwt--cnn---lstm/actions/workflows/tests.yml/badge.svg)](https://github.com/vutrilongdp-create/bearing---fpt---cwt--cnn---lstm/actions/workflows/tests.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 </div>
@@ -157,8 +157,8 @@ is evidence for this setup, not a general claim.
 ## Getting started
 
 ```bash
-git clone https://github.com/OWNER/REPO.git
-cd REPO
+git clone https://github.com/vutrilongdp-create/bearing---fpt---cwt--cnn---lstm.git
+cd bearing---fpt---cwt--cnn---lstm
 python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
