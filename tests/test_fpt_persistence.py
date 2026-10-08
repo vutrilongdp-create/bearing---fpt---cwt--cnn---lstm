@@ -5,7 +5,7 @@ from pathlib import Path
 import numpy as np
 
 
-NOTEBOOK = Path(__file__).parents[1] / "cwt_hi_cnn_prepare_kaggle.ipynb"
+NOTEBOOK = Path(__file__).parents[1] / "notebooks" / "cwt_hi_cnn_prepare_kaggle.ipynb"
 
 
 def load_hi_namespace():

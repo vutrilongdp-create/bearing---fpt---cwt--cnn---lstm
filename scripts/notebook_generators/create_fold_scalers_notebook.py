@@ -413,6 +413,6 @@ notebook = {
     "nbformat_minor": 5,
 }
 
-output = Path(__file__).with_name("03_prepare_fold_scalers_kaggle.ipynb")
+output = Path(__file__).resolve().parents[2] / "notebooks" / "03_prepare_fold_scalers_kaggle.ipynb"
 output.write_text(json.dumps(notebook, ensure_ascii=False, indent=1), encoding="utf-8")
 print(output.name)

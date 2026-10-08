@@ -5,7 +5,7 @@ from pathlib import Path
 import numpy as np
 
 
-NOTEBOOK = Path(__file__).parents[1] / "04_validate_fpt_model_contract_kaggle.ipynb"
+NOTEBOOK = Path(__file__).parents[1] / "notebooks" / "04_validate_fpt_model_contract_kaggle.ipynb"
 
 
 def notebook_code_cells():

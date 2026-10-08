@@ -6,7 +6,7 @@ import numpy as np
 import pytest
 
 
-NOTEBOOK = Path(__file__).parents[1] / "06_calibrated_threshold_fpt_analysis_kaggle.ipynb"
+NOTEBOOK = Path(__file__).parents[1] / "notebooks" / "06_calibrated_threshold_fpt_analysis_kaggle.ipynb"
 
 
 def notebook_code_cells() -> str:
