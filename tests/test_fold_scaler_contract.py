@@ -6,7 +6,7 @@ import numpy as np
 import pytest
 
 
-NOTEBOOK = Path(__file__).parents[1] / "03_prepare_fold_scalers_kaggle.ipynb"
+NOTEBOOK = Path(__file__).parents[1] / "notebooks" / "03_prepare_fold_scalers_kaggle.ipynb"
 BEARINGS = [
     "bearing1_1", "bearing1_2", "bearing2_1",
     "bearing2_2", "bearing3_1", "bearing3_2",

@@ -6,7 +6,7 @@ import numpy as np
 import pytest
 
 
-NOTEBOOK = Path(__file__).parents[1] / "01_rrms_fpt_reference_kaggle.ipynb"
+NOTEBOOK = Path(__file__).parents[1] / "notebooks" / "01_rrms_fpt_reference_kaggle.ipynb"
 
 
 def load_reference_namespace():

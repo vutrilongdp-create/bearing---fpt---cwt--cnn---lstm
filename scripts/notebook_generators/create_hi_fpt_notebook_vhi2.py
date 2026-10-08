@@ -326,6 +326,6 @@ notebook = {
     "nbformat_minor": 5,
 }
 
-output = Path(__file__).with_name("hi_fpt_prepare_kaggle_vhi2.ipynb")
+output = Path(__file__).resolve().parents[2] / "notebooks" / "hi_fpt_prepare_kaggle_vhi2.ipynb"
 output.write_text(json.dumps(notebook, ensure_ascii=False, indent=1), encoding="utf-8")
 print(output.name)

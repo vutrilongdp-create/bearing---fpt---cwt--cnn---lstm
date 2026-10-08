@@ -138,10 +138,11 @@ is evidence for this setup, not a general claim.
 │   ├── 04_validate_fpt_model_contract_kaggle.ipynb # model / data contract checks
 │   ├── 05_train_cnn_vs_cnn_lstm_kaggle.ipynb       # training + FPT evaluation
 │   ├── 06_calibrated_threshold_fpt_analysis_kaggle.ipynb  # inner-val threshold calibration
-│   ├── create_*_notebook.py   # scripts that generate the notebooks above
-│   ├── *_vhi2 / cwt_hi_*      # earlier exploratory iterations (health-index variants)
-│   └── tests/                 # 104 pytest contract tests
-├── scripts/                   # build paper tables & figures from saved artifacts
+│   └── *_vhi2 / cwt_hi_*      # earlier exploratory iterations (health-index variants)
+├── scripts/
+│   ├── notebook_generators/   # create_*_notebook.py: generate each notebook above
+│   └── create_*.py            # build paper tables & figures from saved artifacts
+├── tests/                     # 104 pytest contract tests for the notebooks
 ├── results/
 │   ├── 01_fpt_reference/      # frozen FPT reference + IRRMS threshold sensitivity
 │   ├── 02_cwt_figures/        # CWT images before / at / after FPT
@@ -166,7 +167,7 @@ pip install -r requirements.txt
 **Run the tests** (no dataset or GPU needed):
 
 ```bash
-pytest notebooks/tests -q
+pytest tests -q
 ```
 
 **Rebuild the result tables** from the saved artifacts in `results/`:
@@ -180,8 +181,9 @@ python scripts/create_paper_ready_results.py
 ([FEMTO-ST / IEEE PHM 2012 challenge](https://github.com/wkzs111/phm-ieee-2012-data-challenge-dataset)),
 upload it as a Kaggle dataset, then run notebooks `01 → 06` on Kaggle (GPU recommended),
 attaching each notebook's output as the next one's input. Paths are set at the top of each
-notebook (`/kaggle/input/...`). To change a notebook, edit its `create_*_notebook.py`
-generator and regenerate it so the contract tests stay in sync.
+notebook (`/kaggle/input/...`). To change a notebook, edit its generator in
+`scripts/notebook_generators/` and run it (e.g. `python scripts/notebook_generators/create_train_cnn_vs_cnn_lstm_notebook.py`)
+so the notebook and the contract tests stay in sync.
 
 ## Acknowledgements
 

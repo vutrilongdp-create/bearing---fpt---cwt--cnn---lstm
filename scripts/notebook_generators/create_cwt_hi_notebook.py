@@ -715,6 +715,6 @@ notebook = {
     "nbformat_minor": 5,
 }
 
-output = Path(__file__).with_name("cwt_hi_cnn_prepare_kaggle.ipynb")
+output = Path(__file__).resolve().parents[2] / "notebooks" / "cwt_hi_cnn_prepare_kaggle.ipynb"
 output.write_text(json.dumps(notebook, ensure_ascii=False, indent=1), encoding="utf-8")
 print(output.name)

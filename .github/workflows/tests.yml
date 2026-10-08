@@ -20,4 +20,4 @@ jobs:
           pip install torch --index-url https://download.pytorch.org/whl/cpu
           pip install -r requirements.txt
       - name: Run contract tests
-        run: pytest notebooks/tests -q
+        run: pytest tests -q

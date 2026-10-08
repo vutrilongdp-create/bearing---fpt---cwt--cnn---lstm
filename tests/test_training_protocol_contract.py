@@ -12,7 +12,7 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-NOTEBOOK = Path(__file__).parents[1] / '05_train_cnn_vs_cnn_lstm_kaggle.ipynb'
+NOTEBOOK = Path(__file__).parents[1] / "notebooks" / '05_train_cnn_vs_cnn_lstm_kaggle.ipynb'
 
 # ── Frozen constants ─────────────────────────────────────────────────
 

@@ -7,7 +7,7 @@ import numpy as np
 import pytest
 
 
-NOTEBOOK = Path(__file__).parents[1] / "02_prepare_cwt_cache_kaggle.ipynb"
+NOTEBOOK = Path(__file__).parents[1] / "notebooks" / "02_prepare_cwt_cache_kaggle.ipynb"
 
 
 def notebook_code_cells():
